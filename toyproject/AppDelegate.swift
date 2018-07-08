@@ -16,6 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        window = UIWindow(frame : UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        let layout = PinterrestLayout()
+        //layout.minimumLineSpacing = 0
+        //layout.minimumInteritemSpacing = 0
+        window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
+        
         // Override point for customization after application launch.
         return true
     }
