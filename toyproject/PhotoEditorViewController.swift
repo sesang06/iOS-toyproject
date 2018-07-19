@@ -53,6 +53,26 @@ class PhotoEditorViewController : UIViewController {
         headerImageViewMaskLayer.fillRule = kCAFillRuleEvenOdd
         headerImageViewMaskLayer.path = path.cgPath
     }
+    func updateMask(){
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: maskView.bounds.size.width, y: 0))
+        path.addLine(to: CGPoint(x: maskView.bounds.size.width, y: maskView.bounds.size.height))
+        path.addLine(to: CGPoint(x: 0, y: maskView.bounds.size.height))
+        
+        let path2 = UIBezierPath()
+        
+        path2.move(to: CGPoint(x: finderView.frame.minX, y: finderView.frame.minY))
+        path2.addLine(to: CGPoint(x: finderView.frame.minX, y: finderView.frame.maxY))
+        path2.addLine(to: CGPoint(x: finderView.frame.maxX, y: finderView.frame.maxY))
+        path2.addLine(to: CGPoint(x: finderView.frame.maxX, y: finderView.frame.minY))
+        
+        path2.usesEvenOddFillRule = true
+        path.append(path2)
+        headerImageViewMaskLayer.fillRule = kCAFillRuleEvenOdd
+        headerImageViewMaskLayer.path = path.cgPath
+        
+    }
     var headerImageViewMaskLayer : CAShapeLayer!
     func addHeaderImageViewMaskLayer() {
         headerImageViewMaskLayer = CAShapeLayer()
@@ -65,7 +85,7 @@ class PhotoEditorViewController : UIViewController {
     }
     let finderView : UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor.black
+     //   v.backgroundColor = UIColor.black
       //  v.alpha = 0.5
         
         return v
@@ -77,26 +97,42 @@ class PhotoEditorViewController : UIViewController {
     }()
     let upperRightCornerView : UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor.yellow
+        v.addTopBorder()
+        v.addTrailingBorder()
+//        v.addTopLine()
+//        v.addLeadingLine()
+   //     v.backgroundColor = UIColor.yellow
         return v
     }()
     
     let upperLeftCornerView : UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor.yellow
+        v.addTopBorder()
+        v.addLeadingBorder()
+//        v.addTopLine()
+//        v.addTrailingLine()
+        //v.backgroundColor = UIColor.yellow
         return v
     }()
     
     
     let lowerRightCornerView : UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor.yellow
+        v.addBottomBorder()
+        v.addTrailingBorder()
+//        v.addBottomLine()
+//        v.addLeadingLine()
+        //v.backgroundColor = UIColor.yellow
         return v
     }()
     
     let lowerLeftCornerView : UIView = {
         let v = UIView()
-        v.backgroundColor = UIColor.yellow
+        v.addBottomBorder()
+        v.addLeadingBorder()
+//        v.addBottomLine()
+//        v.addTrailingLine()
+//       // v.backgroundColor = UIColor.yellow
         return v
     }()
     var content : PostContent? {
@@ -133,10 +169,19 @@ class PhotoEditorViewController : UIViewController {
             make.trailing.equalTo(self.view)
             make.leading.equalTo(self.view)
         }
-        view.addSubview(finderView)
         //photoImageView.mask = finderView
-         finderView.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width-20, height: self.view.frame.size.height - 20)
+         finderView.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width-20, height: self.view.frame.size.height - 200)
         view.addSubview(maskView)
+        
+        let realfinderView = UIView()
+        view.addSubview(realfinderView)
+        maskView.addSubview(finderView)
+        realfinderView.snp.makeConstraints { (make) in
+            make.top.equalTo(finderView)
+            make.bottom.equalTo(finderView)
+            make.leading.equalTo(finderView)
+            make.trailing.equalTo(finderView)
+        }
         
         maskView.snp.makeConstraints { (make) in
             make.top.equalTo(self.topLayoutGuide.snp.bottom)
@@ -150,65 +195,88 @@ class PhotoEditorViewController : UIViewController {
         for i in 1...2 {
             let lineView = UIView()
             lineView.backgroundColor = UIColor.white
-            finderView.addSubview(lineView)
+            realfinderView.addSubview(lineView)
             lineView.snp.makeConstraints { (make) in
-                make.top.equalTo(finderView)
-                make.bottom.equalTo(finderView)
+                make.top.equalTo(realfinderView)
+                make.bottom.equalTo(realfinderView)
                 make.width.equalTo(1)
-                make.trailing.equalTo(finderView.snp.trailing).multipliedBy( Float(i) / 3)
+                if (i == 0){
+                    make.leading.equalTo(realfinderView)
+                    
+                } else {
+                    make.trailing.equalTo(realfinderView.snp.trailing).multipliedBy( Float(i) / 3)
+                    
+                }
+                
             }
         }
         
         for i in 1...2 {
             let lineView = UIView()
             lineView.backgroundColor = UIColor.white
-            finderView.addSubview(lineView)
+            realfinderView.addSubview(lineView)
             lineView.snp.makeConstraints { (make) in
                 make.height.equalTo(1)
                 
-                make.leading.equalTo(finderView)
-                make.trailing.equalTo(finderView)
-                make.bottom.equalTo(finderView).multipliedBy( Float(i) / 3)
+                make.leading.equalTo(realfinderView)
+                make.trailing.equalTo(realfinderView)
+                if (i==0 ) {
+                    make.top.equalTo(realfinderView)
+                }else{
+                    make.bottom.equalTo(realfinderView).multipliedBy( Float(i) / 3)
+                }
             }
         }
-        view.addSubview(upperLeftCornerView)
+        let length = 30
+        realfinderView.addSubview(upperLeftCornerView)
         upperLeftCornerView.snp.makeConstraints { (make) in
-            make.height.equalTo(finderView).dividedBy(3)
-            make.width.equalTo(finderView).dividedBy(3)
-            make.top.equalTo(finderView)
-            make.leading.equalTo(finderView)
+//            make.height.equalTo(realfinderView).dividedBy(3)
+//            make.width.equalTo(realfinderView).dividedBy(3)
+            make.top.equalTo(realfinderView)
+            make.leading.equalTo(realfinderView)
+            make.height.equalTo(length)
+            make.width.equalTo(length)
+
         }
         
         let upperLeftPan = UIPanGestureRecognizer(target: self, action: #selector(handleUpperLeftPanGesture))
         upperLeftCornerView.addGestureRecognizer(upperLeftPan)
         
-        finderView.addSubview(upperRightCornerView)
+        realfinderView.addSubview(upperRightCornerView)
         upperRightCornerView.snp.makeConstraints { (make) in
-            make.height.equalTo(finderView).dividedBy(3)
-            make.width.equalTo(finderView).dividedBy(3)
-            make.top.equalTo(finderView)
-            make.trailing.equalTo(finderView)
-            
+//            make.height.equalTo(realfinderView).dividedBy(3)
+//            make.width.equalTo(realfinderView).dividedBy(3)
+            make.top.equalTo(realfinderView)
+            make.trailing.equalTo(realfinderView)
+            make.height.equalTo(length)
+            make.width.equalTo(length)
         }
         
         let upperRightPan = UIPanGestureRecognizer(target: self, action: #selector(handleUpperRightPanGesture))
         upperRightCornerView.addGestureRecognizer(upperRightPan)
         
-        view.addSubview(lowerLeftCornerView)
+        realfinderView.addSubview(lowerLeftCornerView)
         lowerLeftCornerView.snp.makeConstraints { (make) in
-            make.height.equalTo(finderView).dividedBy(3)
-            make.width.equalTo(finderView).dividedBy(3)
-            make.bottom.equalTo(finderView)
-            make.leading.equalTo(finderView)
+//            make.height.equalTo(realfinderView).dividedBy(3)
+//            make.width.equalTo(realfinderView).dividedBy(3)
+            make.bottom.equalTo(realfinderView)
+            make.leading.equalTo(realfinderView)
+            make.height.equalTo(length)
+            make.width.equalTo(length)
+
         }
-        
-        
-        view.addSubview(lowerRightCornerView)
+        realfinderView.layer.borderColor = UIColor.white.cgColor
+        realfinderView.layer.borderWidth = 1
+      //  realfinderView.addBottomBorder()
+        realfinderView.addSubview(lowerRightCornerView)
         lowerRightCornerView.snp.makeConstraints { (make) in
-            make.height.equalTo(finderView).dividedBy(3)
-            make.width.equalTo(finderView).dividedBy(3)
-            make.bottom.equalTo(finderView)
-            make.trailing.equalTo(finderView)
+//            make.height.equalTo(realfinderView).dividedBy(3)
+//            make.width.equalTo(realfinderView).dividedBy(3)
+            make.bottom.equalTo(realfinderView)
+            make.trailing.equalTo(realfinderView)
+            make.height.equalTo(length)
+            make.width.equalTo(length)
+
         }
 //        view.addSubview(maskView)
 //        maskView.snp.makeConstraints { (make) in
@@ -257,11 +325,13 @@ extension PhotoEditorViewController {
             print(translation)
             if  let startRect = startRect {
                 finderView.frame = CGRect(x: startRect.origin.x , y: startRect.origin.y + translation.y, width: startRect.width + translation.x, height: startRect.height - translation.y)
-            //    setMask(with: finderView.frame, in: photoImageView)
+                updateMask()
+                //    setMask(with: finderView.frame, in: photoImageView)
                 
             }
         }
     }
+    
     @objc func handleUpperLeftPanGesture(recognizer: UIPanGestureRecognizer) {
         
         if (recognizer.state == UIGestureRecognizerState.began){
@@ -275,8 +345,67 @@ extension PhotoEditorViewController {
             print(translation)
             if  let startRect = startRect {
                 finderView.frame = CGRect(x: startRect.origin.x + translation.x, y: startRect.origin.y + translation.y, width: startRect.width - translation.x, height: startRect.height - translation.y)
+                updateMask()
                 
             }
+        }
+    }
+}
+extension UIView{
+    func addTopBorder(color: UIColor = UIColor.white, constant : CGFloat = 2 ,margins: CGFloat = 0) {
+        let border = UIView()
+        border.backgroundColor = color
+        border.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(border)
+        border.snp.makeConstraints { (make) in
+            make.height.equalTo(constant)
+        }
+        border.snp.makeConstraints { (make) in
+            make.top.equalTo(self).offset(-constant)
+            make.trailing.equalTo(self)
+            make.leading.equalTo(self)
+        }
+    }
+    func addLeadingBorder(color: UIColor = UIColor.white, constant : CGFloat = 2 ,margins: CGFloat = 0) {
+        let border = UIView()
+        border.backgroundColor = color
+        border.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(border)
+        border.snp.makeConstraints { (make) in
+            make.width.equalTo(constant)
+        }
+        border.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self)
+            make.top.equalTo(self)
+            make.leading.equalTo(self).offset(-constant)
+        }
+    }
+    func addTrailingBorder(color: UIColor = UIColor.white, constant : CGFloat = 2 ,margins: CGFloat = 0) {
+        let border = UIView()
+        border.backgroundColor = color
+        border.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(border)
+        border.snp.makeConstraints { (make) in
+            make.width.equalTo(constant)
+        }
+        border.snp.makeConstraints { (make) in
+            make.top.equalTo(self)
+            make.bottom.equalTo(self)
+            make.trailing.equalTo(self).offset(constant)
+        }
+    }
+    func addBottomBorder(color: UIColor = UIColor.white, constant : CGFloat = 2 ,margins: CGFloat = 0) {
+        let border = UIView()
+        border.backgroundColor = color
+        border.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(border)
+        border.snp.makeConstraints { (make) in
+            make.height.equalTo(constant)
+        }
+        border.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self).offset(constant)
+            make.trailing.equalTo(self)
+            make.leading.equalTo(self)
         }
     }
 }
