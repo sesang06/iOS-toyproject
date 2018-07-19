@@ -7,28 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		86019BF520FB76100018A6CA /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86019BF420FB76100018A6CA /* PhotoEditorViewController.swift */; };
 		8641A3BF20EFB54A00BBC5A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3BE20EFB54A00BBC5A4 /* AppDelegate.swift */; };
 		8641A3C120EFB54A00BBC5A4 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3C020EFB54A00BBC5A4 /* HomeController.swift */; };
-		8641A3C420EFB54A00BBC5A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8641A3C220EFB54A00BBC5A4 /* Main.storyboard */; };
 		8641A3C720EFB54A00BBC5A4 /* toyproject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3C520EFB54A00BBC5A4 /* toyproject.xcdatamodeld */; };
 		8641A3C920EFB55000BBC5A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8641A3C820EFB55000BBC5A4 /* Assets.xcassets */; };
 		8641A3CC20EFB55000BBC5A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8641A3CA20EFB55000BBC5A4 /* LaunchScreen.storyboard */; };
 		8641A3F520F1059900BBC5A4 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3F420F1059900BBC5A4 /* MenuBar.swift */; };
 		8641A3F720F1E75B00BBC5A4 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3F620F1E75B00BBC5A4 /* FeedCell.swift */; };
+		8641A3F920F1F83900BBC5A4 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3F820F1F83900BBC5A4 /* ContentCell.swift */; };
+		8641A3FB20F1F9AB00BBC5A4 /* PinterrestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FA20F1F9AB00BBC5A4 /* PinterrestLayout.swift */; };
+		8641A3FD20F210EC00BBC5A4 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FC20F210EC00BBC5A4 /* TrendingCell.swift */; };
+		8641A3FF20F21CA500BBC5A4 /* FacebookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FE20F21CA500BBC5A4 /* FacebookCell.swift */; };
+		86B5675E20F38DD600D2723A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5675D20F38DD600D2723A /* Extensions.swift */; };
+		86B5676020F4F3D800D2723A /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5675F20F4F3D800D2723A /* PostCell.swift */; };
 		C30C6C8835C7A55E3F24207D /* Pods_toyproject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C0FFF8C5841BACAA043A0 /* Pods_toyproject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		86019BF420FB76100018A6CA /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
 		8641A3BB20EFB54A00BBC5A4 /* toyproject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = toyproject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8641A3BE20EFB54A00BBC5A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8641A3C020EFB54A00BBC5A4 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
-		8641A3C320EFB54A00BBC5A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8641A3C620EFB54A00BBC5A4 /* toyproject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = toyproject.xcdatamodel; sourceTree = "<group>"; };
 		8641A3C820EFB55000BBC5A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8641A3CB20EFB55000BBC5A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8641A3CD20EFB55000BBC5A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8641A3F420F1059900BBC5A4 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		8641A3F620F1E75B00BBC5A4 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		8641A3F820F1F83900BBC5A4 /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
+		8641A3FA20F1F9AB00BBC5A4 /* PinterrestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterrestLayout.swift; sourceTree = "<group>"; };
+		8641A3FC20F210EC00BBC5A4 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
+		8641A3FE20F21CA500BBC5A4 /* FacebookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookCell.swift; sourceTree = "<group>"; };
+		86B5675D20F38DD600D2723A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		86B5675F20F4F3D800D2723A /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		87C20323049C8E74EAA126FB /* Pods-toyproject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toyproject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-toyproject/Pods-toyproject.debug.xcconfig"; sourceTree = "<group>"; };
 		D43C0FFF8C5841BACAA043A0 /* Pods_toyproject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_toyproject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE3AE8F21AC9C48370A1960 /* Pods-toyproject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toyproject.release.xcconfig"; path = "Pods/Target Support Files/Pods-toyproject/Pods-toyproject.release.xcconfig"; sourceTree = "<group>"; };
@@ -78,13 +90,19 @@
 			children = (
 				8641A3BE20EFB54A00BBC5A4 /* AppDelegate.swift */,
 				8641A3C020EFB54A00BBC5A4 /* HomeController.swift */,
-				8641A3C220EFB54A00BBC5A4 /* Main.storyboard */,
 				8641A3C820EFB55000BBC5A4 /* Assets.xcassets */,
 				8641A3CA20EFB55000BBC5A4 /* LaunchScreen.storyboard */,
 				8641A3CD20EFB55000BBC5A4 /* Info.plist */,
 				8641A3C520EFB54A00BBC5A4 /* toyproject.xcdatamodeld */,
 				8641A3F420F1059900BBC5A4 /* MenuBar.swift */,
+				86B5675F20F4F3D800D2723A /* PostCell.swift */,
 				8641A3F620F1E75B00BBC5A4 /* FeedCell.swift */,
+				8641A3F820F1F83900BBC5A4 /* ContentCell.swift */,
+				8641A3FA20F1F9AB00BBC5A4 /* PinterrestLayout.swift */,
+				8641A3FC20F210EC00BBC5A4 /* TrendingCell.swift */,
+				8641A3FE20F21CA500BBC5A4 /* FacebookCell.swift */,
+				86B5675D20F38DD600D2723A /* Extensions.swift */,
+				86019BF420FB76100018A6CA /* PhotoEditorViewController.swift */,
 			);
 			path = toyproject;
 			sourceTree = "<group>";
@@ -159,7 +177,6 @@
 			files = (
 				8641A3CC20EFB55000BBC5A4 /* LaunchScreen.storyboard in Resources */,
 				8641A3C920EFB55000BBC5A4 /* Assets.xcassets in Resources */,
-				8641A3C420EFB54A00BBC5A4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,25 +228,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8641A3FD20F210EC00BBC5A4 /* TrendingCell.swift in Sources */,
 				8641A3C120EFB54A00BBC5A4 /* HomeController.swift in Sources */,
+				86019BF520FB76100018A6CA /* PhotoEditorViewController.swift in Sources */,
 				8641A3F720F1E75B00BBC5A4 /* FeedCell.swift in Sources */,
+				8641A3FB20F1F9AB00BBC5A4 /* PinterrestLayout.swift in Sources */,
+				8641A3FF20F21CA500BBC5A4 /* FacebookCell.swift in Sources */,
+				86B5675E20F38DD600D2723A /* Extensions.swift in Sources */,
 				8641A3BF20EFB54A00BBC5A4 /* AppDelegate.swift in Sources */,
 				8641A3F520F1059900BBC5A4 /* MenuBar.swift in Sources */,
+				86B5676020F4F3D800D2723A /* PostCell.swift in Sources */,
 				8641A3C720EFB54A00BBC5A4 /* toyproject.xcdatamodeld in Sources */,
+				8641A3F920F1F83900BBC5A4 /* ContentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8641A3C220EFB54A00BBC5A4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8641A3C320EFB54A00BBC5A4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8641A3CA20EFB55000BBC5A4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

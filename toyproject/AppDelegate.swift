@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+import SnapKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,10 +18,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame : UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        let layout = PinterrestLayout()
-        //layout.minimumLineSpacing = 0
-        //layout.minimumInteritemSpacing = 0
+        let layout = UICollectionViewFlowLayout()
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
+        UINavigationBar.appearance().backgroundColor = Constants.primaryDarkColor
+       // UINavigationBar.appearance().titleTextAttributes = [ NSAttributedStringKey.foregroundColor : Constants.primaryTextColor]
+        
+        UINavigationBar.appearance().barTintColor = Constants.primaryColor
+        // get rid of black bar
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        
+        
+        application.statusBarStyle = .lightContent
+        
+        let statusBarBackgroundView = UIView()
+        statusBarBackgroundView.backgroundColor = Constants.primaryDarkColor
+        
+        window?.addSubview(statusBarBackgroundView)
+        
+        statusBarBackgroundView.snp.makeConstraints { (make) in
+            make.top.equalTo((window?.snp.top)!)
+            make.leading.equalTo((window?.snp.leading)!)
+            make.trailing.equalTo((window?.snp.trailing)!)
+            make.height.equalTo(20)
+        }
+        /*window?.addConstraintsWithFormat("H:|[v0]|", views: statusBarBackgroundView)
+    
+        window?.addConstraintsWithFormat("V:|[v0(20)]|", views: statusBarBackgroundView)
+ */
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
         
         // Override point for customization after application launch.
         return true

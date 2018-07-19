@@ -14,13 +14,17 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.blue
+        cv.backgroundColor = UIColor.white
         cv.dataSource = self
         cv.delegate = self
         return cv
     }()
     let cellId = "cellIdj"
     var homeController : HomeController?
+    var horizontalBarLeftAnchorConstraint : Constraint? = nil
+    
+    
+    let imageNames = ["home", "home", "home", "home"]
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -37,13 +41,42 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         //addConstraintsWithFormat("V:|[v0]|", views: collectionView)
       let selectedIndexPath = IndexPath(item: 0, section: 0)
         collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition()  )
+        setupHorizontalBar()
     }
+    
+    
+    func setupHorizontalBar(){
+        let horizontalBarView = UIView()
+        horizontalBarView.backgroundColor = Constants.primaryColor
+        addSubview(horizontalBarView)
+        let bottomLineView = UIView()
+        bottomLineView.backgroundColor = UIColor.lightGray
+        addSubview(bottomLineView)
+        bottomLineView.snp.makeConstraints { (make) in
+            make.height.equalTo(1).dividedBy(2)
+            make.bottom.equalTo(self)
+            make.width.equalTo(self)
+        }
+        horizontalBarView.snp.makeConstraints { (make) in
+            make.height.equalTo(4)
+            make.bottom.equalTo(self)
+            make.width.equalTo(self).multipliedBy(0.25)
+            horizontalBarLeftAnchorConstraint =
+                make.leading.equalTo(self).constraint
+        }
+        
+        self.bringSubview(toFront: horizontalBarView)
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
+        cell.imageView.image = UIImage(named: imageNames[indexPath.item])?.withRenderingMode(.alwaysTemplate)
+        cell.tintColor = UIColor.blue
         return cell
     }
     
@@ -58,9 +91,16 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        homeController?.scrollToMenuIndex(indexPath.item)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
 }
 extension UIView {
     func addConstraintsWithFormat(_ format: String, views: UIView...){
@@ -85,17 +125,18 @@ class MenuCell: UICollectionViewCell {
     let imageView : UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "home")?.withRenderingMode(.alwaysTemplate)
-        iv.tintColor = UIColor.brown
+        iv.tintColor = UIColor.black
         return iv
     }()
     override var isHighlighted: Bool {
         didSet {
-            imageView.tintColor = isHighlighted ? UIColor.white : UIColor.brown
+            imageView.tintColor = isHighlighted ? Constants.primaryColor : UIColor.black
         }
     }
+    
     override var isSelected: Bool {
         didSet {
-            imageView.tintColor = isHighlighted ? UIColor.white : UIColor.brown
+            imageView.tintColor = isSelected ? Constants.primaryColor : UIColor.black
         }
     }
     func setupViews(){
