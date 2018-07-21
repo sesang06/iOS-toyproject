@@ -26,48 +26,11 @@ class PhotoEditorViewController : UIViewController {
 //        navBar.setItems([navItem], animated: false)
 //        self.view.addSubview(navBar)
 //    }
-//
-    
-    override func viewDidAppear(_ animated: Bool) {
-        //...생략
-        updateHeaderImageViewMask()
-    }
-    var kHeaderImageViewHeight: CGFloat = 250.0
-    let kHeaderImageViewCutAway: CGFloat = 60.0
-    func updateHeaderImageViewMask() {
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: photoImageView.bounds.size.width, y: 0))
-        path.addLine(to: CGPoint(x: photoImageView.bounds.size.width, y: photoImageView.bounds.size.height))
-        path.addLine(to: CGPoint(x: 0, y: photoImageView.bounds.size.height-kHeaderImageViewCutAway))
-        
-        let path2 = UIBezierPath()
-        
-        path2.move(to: CGPoint(x: 40, y:40))
-        path2.addLine(to: CGPoint(x: photoImageView.bounds.size.width-40, y: 40))
-        path2.addLine(to: CGPoint(x: photoImageView.bounds.size.width-40, y: photoImageView.bounds.size.height-40))
-        path2.addLine(to: CGPoint(x: 40, y: photoImageView.bounds.size.height-40-kHeaderImageViewCutAway))
-        
-        path2.usesEvenOddFillRule = true
-        path.append(path2)
-        headerImageViewMaskLayer.fillRule = kCAFillRuleEvenOdd
-        headerImageViewMaskLayer.path = path.cgPath
-    }
+
     func updateMask(){
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: maskView.bounds.size.width, y: 0))
-        path.addLine(to: CGPoint(x: maskView.bounds.size.width, y: maskView.bounds.size.height))
-        path.addLine(to: CGPoint(x: 0, y: maskView.bounds.size.height))
-        
-        let path2 = UIBezierPath()
-        
-        path2.move(to: CGPoint(x: finderView.frame.minX, y: finderView.frame.minY))
-        path2.addLine(to: CGPoint(x: finderView.frame.minX, y: finderView.frame.maxY))
-        path2.addLine(to: CGPoint(x: finderView.frame.maxX, y: finderView.frame.maxY))
-        path2.addLine(to: CGPoint(x: finderView.frame.maxX, y: finderView.frame.minY))
-        
-        path2.usesEvenOddFillRule = true
+        let path = UIBezierPath(rect: view.bounds)
+        let path2 = UIBezierPath(rect: finderView.frame)
+//        path2.usesEvenOddFillRule = true
         path.append(path2)
         headerImageViewMaskLayer.fillRule = kCAFillRuleEvenOdd
         headerImageViewMaskLayer.path = path.cgPath
@@ -76,18 +39,23 @@ class PhotoEditorViewController : UIViewController {
     var headerImageViewMaskLayer : CAShapeLayer!
     func addHeaderImageViewMaskLayer() {
         headerImageViewMaskLayer = CAShapeLayer()
-//        let color = UIColor(red: 1, green: 1, blue: 1, alpha: 0.5)
-        
         headerImageViewMaskLayer.fillColor = UIColor.gray.cgColor
         headerImageViewMaskLayer.opacity = 0.5
+        headerImageViewMaskLayer.fillRule = kCAFillRuleEvenOdd
         
         maskView.layer.mask = headerImageViewMaskLayer
+        maskView.layoutIfNeeded()
     }
+    let scrollView : UIScrollView = {
+        let sv = UIScrollView()
+        sv.maximumZoomScale = 10
+        sv.minimumZoomScale = 1
+        sv.bouncesZoom = false
+        sv.bounces = false
+        return sv
+    }()
     let finderView : UIView = {
         let v = UIView()
-     //   v.backgroundColor = UIColor.black
-      //  v.alpha = 0.5
-        
         return v
     }()
     let maskView : UIView = {
@@ -99,9 +67,6 @@ class PhotoEditorViewController : UIViewController {
         let v = UIView()
         v.addTopBorder()
         v.addTrailingBorder()
-//        v.addTopLine()
-//        v.addLeadingLine()
-   //     v.backgroundColor = UIColor.yellow
         return v
     }()
     
@@ -109,9 +74,6 @@ class PhotoEditorViewController : UIViewController {
         let v = UIView()
         v.addTopBorder()
         v.addLeadingBorder()
-//        v.addTopLine()
-//        v.addTrailingLine()
-        //v.backgroundColor = UIColor.yellow
         return v
     }()
     
@@ -120,9 +82,6 @@ class PhotoEditorViewController : UIViewController {
         let v = UIView()
         v.addBottomBorder()
         v.addTrailingBorder()
-//        v.addBottomLine()
-//        v.addLeadingLine()
-        //v.backgroundColor = UIColor.yellow
         return v
     }()
     
@@ -130,19 +89,36 @@ class PhotoEditorViewController : UIViewController {
         let v = UIView()
         v.addBottomBorder()
         v.addLeadingBorder()
-//        v.addBottomLine()
-//        v.addTrailingLine()
-//       // v.backgroundColor = UIColor.yellow
         return v
     }()
     var content : PostContent? {
         didSet {
             let targetSize = CGSize(width: view.frame.width , height : view.frame.width )
             let imageManager = PHImageManager()
+            
+            let options = PHImageRequestOptions()
+//            options.version = .original
+            options.deliveryMode = .highQualityFormat
+            options.resizeMode = .exact
+            options.isSynchronous = true
+//            imageManager.requestImageForAsset(asset as! PHAsset, targetSize: PHImageManagerMaximumSize, contentMode: PHImageContentMode.Default, options: options, resultHandler: { (pickedImage, info) in
+//
+//                self.yourImageview.image = pickedImage // you can get image like this way
+//                
+//            })
+//            imageManager.requestImage(for: (self.content?.asset!)!, targetSize: PHImageManagerMaximumSize, contentMode: .default, options: options) { (image, _) in
+//                self.photoImageView.image = image
+//            }
+//            imageManager.requestImageData(for: (self.content?.asset!)!, options: options) { data, _, _ , _ in
+//                if let data = data {
+//                    self.photoImageView.image = UIImage(data: data)
+//                }
+//            }
+//
             imageManager.requestImage(for: (self.content?.asset!)!, targetSize: targetSize, contentMode: .aspectFit, options: nil) { (image, _) in
                 self.photoImageView.image = image
             }
-            
+
         }
     }
     let photoImageView : UIImageView =  {
@@ -162,19 +138,31 @@ class PhotoEditorViewController : UIViewController {
         
     }
     func setUpView(){
-        view.addSubview(photoImageView)
-        photoImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.topLayoutGuide.snp.bottom)
-            make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
-            make.trailing.equalTo(self.view)
-            make.leading.equalTo(self.view)
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.top.equalTo(view)
+            make.bottom.equalTo(view)
+            make.trailing.equalTo(view)
+            make.leading.equalTo(view)
+            make.width.equalTo(view)
+            make.height.equalTo(view)
         }
-        //photoImageView.mask = finderView
+        scrollView.backgroundColor = UIColor.blue
+        scrollView.delegate = self
+        
+        scrollView.addSubview(photoImageView)
+     
+        photoImageView.snp.makeConstraints { (make) in
+            make.top.equalTo(scrollView)
+            make.bottom.equalTo(scrollView)
+            make.trailing.equalTo(scrollView)
+            make.leading.equalTo(scrollView)
+        }
          finderView.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width-20, height: self.view.frame.size.height - 200)
-        view.addSubview(maskView)
+        scrollView.addSubview(maskView)
         
         let realfinderView = UIView()
-        view.addSubview(realfinderView)
+        scrollView.addSubview(realfinderView)
         maskView.addSubview(finderView)
         realfinderView.snp.makeConstraints { (make) in
             make.top.equalTo(finderView)
@@ -190,8 +178,6 @@ class PhotoEditorViewController : UIViewController {
             make.leading.equalTo(self.view)
             
         }
-       // setMask(with: finderView.frame, in: photoImageView)
-        
         for i in 1...2 {
             let lineView = UIView()
             lineView.backgroundColor = UIColor.white
@@ -230,86 +216,66 @@ class PhotoEditorViewController : UIViewController {
         let length = 30
         realfinderView.addSubview(upperLeftCornerView)
         upperLeftCornerView.snp.makeConstraints { (make) in
-//            make.height.equalTo(realfinderView).dividedBy(3)
-//            make.width.equalTo(realfinderView).dividedBy(3)
             make.top.equalTo(realfinderView)
             make.leading.equalTo(realfinderView)
             make.height.equalTo(length)
             make.width.equalTo(length)
 
         }
-        
-        let upperLeftPan = UIPanGestureRecognizer(target: self, action: #selector(handleUpperLeftPanGesture))
-        upperLeftCornerView.addGestureRecognizer(upperLeftPan)
         
         realfinderView.addSubview(upperRightCornerView)
         upperRightCornerView.snp.makeConstraints { (make) in
-//            make.height.equalTo(realfinderView).dividedBy(3)
-//            make.width.equalTo(realfinderView).dividedBy(3)
             make.top.equalTo(realfinderView)
             make.trailing.equalTo(realfinderView)
             make.height.equalTo(length)
             make.width.equalTo(length)
         }
         
-        let upperRightPan = UIPanGestureRecognizer(target: self, action: #selector(handleUpperRightPanGesture))
-        upperRightCornerView.addGestureRecognizer(upperRightPan)
-        
         realfinderView.addSubview(lowerLeftCornerView)
         lowerLeftCornerView.snp.makeConstraints { (make) in
-//            make.height.equalTo(realfinderView).dividedBy(3)
-//            make.width.equalTo(realfinderView).dividedBy(3)
             make.bottom.equalTo(realfinderView)
             make.leading.equalTo(realfinderView)
             make.height.equalTo(length)
             make.width.equalTo(length)
-
         }
         realfinderView.layer.borderColor = UIColor.white.cgColor
         realfinderView.layer.borderWidth = 1
-      //  realfinderView.addBottomBorder()
         realfinderView.addSubview(lowerRightCornerView)
         lowerRightCornerView.snp.makeConstraints { (make) in
-//            make.height.equalTo(realfinderView).dividedBy(3)
-//            make.width.equalTo(realfinderView).dividedBy(3)
             make.bottom.equalTo(realfinderView)
             make.trailing.equalTo(realfinderView)
             make.height.equalTo(length)
             make.width.equalTo(length)
 
         }
-//        view.addSubview(maskView)
-//        maskView.snp.makeConstraints { (make) in
-//            make.top.equalTo(view)
-//            make.bottom.equalTo(view)
-//            make.trailing.equalTo(view)
-//            make.leading.equalTo(view)
-//        }
-        
-//
-       addHeaderImageViewMaskLayer()
-        updateHeaderImageViewMask()
-        
+       view.bringSubview(toFront: scrollView)
+    }
+    func setUpGesture(){
+        let lowerRightPan = UIPanGestureRecognizer(target: self, action: #selector(handleLowerRightPanGesture))
+        lowerRightCornerView.addGestureRecognizer(lowerRightPan)
+        lowerRightPan.delegate = self
+        let upperRightPan = UIPanGestureRecognizer(target: self, action: #selector(handleUpperRightPanGesture))
+        upperRightCornerView.addGestureRecognizer(upperRightPan)
+        upperRightPan.delegate = self
+        let lowerLeftPan = UIPanGestureRecognizer(target: self, action: #selector(handleLowerLeftPanGesture))
+        lowerLeftCornerView.addGestureRecognizer(lowerLeftPan)
+        lowerLeftPan.delegate = self
+        let upperLeftPan = UIPanGestureRecognizer(target: self, action: #selector(handleUpperLeftPanGesture))
+        upperLeftCornerView.addGestureRecognizer(upperLeftPan)
+        upperLeftPan.delegate = self
     }
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.white
      //   setNavigationBar()
         setUpNavigationBar()
+        addHeaderImageViewMaskLayer()
         setUpView()
+        updateMask()
+        setUpGesture()
     }
     var startRect : CGRect?
+    let const : CGFloat = 30 * 3
     
-}
-extension PhotoEditorViewController {
-    func setMask(with hole : CGRect, in view : UIView){
-        let mutablePath = CGMutablePath()
-        mutablePath.addRect(view.bounds)
-        mutablePath.addRect(hole)
-        let mask = CAShapeLayer()
-        mask.path = mutablePath
-        mask.fillRule = kCAFillRuleEvenOdd
-        view.layer.mask = mask
-    }
 }
 extension PhotoEditorViewController {
     @objc func handleUpperRightPanGesture(recognizer: UIPanGestureRecognizer) {
@@ -323,8 +289,9 @@ extension PhotoEditorViewController {
             let translation = recognizer.translation(in: self.view)
             print(location)
             print(translation)
+            
             if  let startRect = startRect {
-                finderView.frame = CGRect(x: startRect.origin.x , y: startRect.origin.y + translation.y, width: startRect.width + translation.x, height: startRect.height - translation.y)
+                finderView.frame = CGRect(x:  startRect.origin.x , y: min(startRect.maxY - const, startRect.origin.y + translation.y), width: max (startRect.width + translation.x, const), height:  max(startRect.height - translation.y, const))
                 updateMask()
                 //    setMask(with: finderView.frame, in: photoImageView)
                 
@@ -344,11 +311,69 @@ extension PhotoEditorViewController {
             print(location)
             print(translation)
             if  let startRect = startRect {
-                finderView.frame = CGRect(x: startRect.origin.x + translation.x, y: startRect.origin.y + translation.y, width: startRect.width - translation.x, height: startRect.height - translation.y)
+                
+                finderView.frame = CGRect(x: min( startRect.origin.x + translation.x , startRect.maxX - const) , y: min ( startRect.origin.y + translation.y,startRect.maxY-const) , width: max(startRect.width - translation.x, const), height: max(startRect.height - translation.y, const))
                 updateMask()
                 
             }
         }
+    }
+    
+    
+    @objc func handleLowerRightPanGesture(recognizer: UIPanGestureRecognizer) {
+        
+        if (recognizer.state == UIGestureRecognizerState.began){
+            startRect = finderView.frame
+        }
+        
+        if (recognizer.state == UIGestureRecognizerState.changed){
+            let location = recognizer.location(in: self.view)
+            let translation = recognizer.translation(in: self.view)
+            print(location)
+            print(translation)
+            if  let startRect = startRect {
+                if (startRect.width - translation.x <= const){
+                    
+                }
+                finderView.frame = CGRect(x: startRect.origin.x , y: startRect.origin.y, width: max (startRect.width + translation.x, const), height: max (startRect.height + translation.y , const))
+                updateMask()
+                //    setMask(with: finderView.frame, in: photoImageView)
+                
+            }
+        }
+    }
+    
+    @objc func handleLowerLeftPanGesture(recognizer: UIPanGestureRecognizer) {
+        
+        if (recognizer.state == UIGestureRecognizerState.began){
+            startRect = finderView.frame
+        }
+        
+        if (recognizer.state == UIGestureRecognizerState.changed){
+            let location = recognizer.location(in: self.view)
+            let translation = recognizer.translation(in: self.view)
+            print(location)
+            print(translation)
+            if  let startRect = startRect {
+                finderView.frame = CGRect(x: min(startRect.maxX - const, startRect.origin.x + translation.x ), y: startRect.origin.y, width: max (startRect.width - translation.x, const), height: max( startRect.height + translation.y, const))
+                updateMask()
+                
+            }
+        }
+    }
+    
+}
+extension PhotoEditorViewController : UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return photoImageView
+    }
+    
+}
+extension PhotoEditorViewController : UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer)
+        -> Bool {
+            return true
     }
 }
 extension UIView{
@@ -407,5 +432,21 @@ extension UIView{
             make.trailing.equalTo(self)
             make.leading.equalTo(self)
         }
+    }
+}
+
+extension UIImageView {
+    func imageFrame() -> CGRect {
+        let imageViewSize = self.frame.size
+        guard let imageSize = self.image?.size else { return CGRect.zero}
+        let imageRatio = imageSize.width / imageSize.height
+        let imageViewRatio = imageViewSize.width / imageViewSize.height
+        if imageRatio < imageViewRatio {
+            let scaleFactor = imageViewSize.height / imageSize.height
+            let width = imageSize.width * scaleFactor
+            let topLeftX = (imageViewSize.width - width) * 0.5
+            
+        }
+        return CGRect.zero
     }
 }

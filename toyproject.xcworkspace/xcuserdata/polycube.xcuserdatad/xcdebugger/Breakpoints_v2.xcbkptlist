@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "toyproject/MenuBar.swift"
-            timestampString = "553356175.718894"
+            timestampString = "553839040.879535"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "toyproject/PhotoEditorViewController.swift"
-            timestampString = "553706120.304003"
+            timestampString = "553883869.062384"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "handleUpperLeftPanGesture(recognizer:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,12 +170,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "toyproject/PhotoEditorViewController.swift"
-            timestampString = "553706120.304444"
+            timestampString = "553883869.062833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "updateMask()"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
+            landmarkName = "handleUpperRightPanGesture(recognizer:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -186,13 +186,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "toyproject/PhotoEditorViewController.swift"
-            timestampString = "553706120.3047301"
+            timestampString = "553883869.063169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
-            landmarkName = "handleUpperRightPanGesture(recognizer:)"
-            landmarkType = "7">
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "content"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

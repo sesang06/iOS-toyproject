@@ -19,7 +19,6 @@
 		8641A3FB20F1F9AB00BBC5A4 /* PinterrestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FA20F1F9AB00BBC5A4 /* PinterrestLayout.swift */; };
 		8641A3FD20F210EC00BBC5A4 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FC20F210EC00BBC5A4 /* TrendingCell.swift */; };
 		8641A3FF20F21CA500BBC5A4 /* FacebookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FE20F21CA500BBC5A4 /* FacebookCell.swift */; };
-		865876EF2100D2EC000F244C /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 865876EE2100D2EC000F244C /* View.xib */; };
 		86B5675E20F38DD600D2723A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5675D20F38DD600D2723A /* Extensions.swift */; };
 		86B5676020F4F3D800D2723A /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5675F20F4F3D800D2723A /* PostCell.swift */; };
 		C30C6C8835C7A55E3F24207D /* Pods_toyproject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C0FFF8C5841BACAA043A0 /* Pods_toyproject.framework */; };
@@ -40,7 +39,6 @@
 		8641A3FA20F1F9AB00BBC5A4 /* PinterrestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterrestLayout.swift; sourceTree = "<group>"; };
 		8641A3FC20F210EC00BBC5A4 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		8641A3FE20F21CA500BBC5A4 /* FacebookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookCell.swift; sourceTree = "<group>"; };
-		865876EE2100D2EC000F244C /* View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		86B5675D20F38DD600D2723A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		86B5675F20F4F3D800D2723A /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		87C20323049C8E74EAA126FB /* Pods-toyproject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toyproject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-toyproject/Pods-toyproject.debug.xcconfig"; sourceTree = "<group>"; };
@@ -72,7 +70,6 @@
 		8641A3B220EFB54A00BBC5A4 = {
 			isa = PBXGroup;
 			children = (
-				865876EE2100D2EC000F244C /* View.xib */,
 				8641A3BD20EFB54A00BBC5A4 /* toyproject */,
 				8641A3BC20EFB54A00BBC5A4 /* Products */,
 				49A846AF8C0EED68D0F69D84 /* Pods */,
@@ -179,7 +176,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8641A3CC20EFB55000BBC5A4 /* LaunchScreen.storyboard in Resources */,
-				865876EF2100D2EC000F244C /* View.xib in Resources */,
 				8641A3C920EFB55000BBC5A4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
