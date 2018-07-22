@@ -26,7 +26,24 @@ class PhotoEditorViewController : UIViewController {
 //        navBar.setItems([navItem], animated: false)
 //        self.view.addSubview(navBar)
 //    }
-
+    var cropArea: CGRect {
+        get {
+            let factor = photoImageView.image!.size.width / view.frame.width
+            let scale = 1 / scrollView.zoomScale
+            let imageFrame = photoImageView.imageFrame()
+            let x = (scrollView.contentOffset.x + finderView.frame.origin.x - imageFrame.origin.x) * scale * factor
+            let y = (scrollView.contentOffset.y + finderView.frame.origin.y - imageFrame.origin.y) * scale * factor
+            let width = finderView.frame.size.width * scale * factor
+            let height = finderView.frame.size.height * scale * factor
+            return CGRect(x: x, y: y, width: width, height: height)
+        }
+    }
+    func crop() {
+        let croppedCGImage = photoImageView.image?.cgImage?.cropping(to: cropArea)
+        let croppedImage = UIImage(cgImage: croppedCGImage!)
+        photoImageView.image = croppedImage
+        scrollView.zoomScale = 1
+    }
     func updateMask(){
         let path = UIBezierPath(rect: view.bounds)
         let path2 = UIBezierPath(rect: finderView.frame)
@@ -117,6 +134,7 @@ class PhotoEditorViewController : UIViewController {
 //
             imageManager.requestImage(for: (self.content?.asset!)!, targetSize: targetSize, contentMode: .aspectFit, options: nil) { (image, _) in
                 self.photoImageView.image = image
+                self.scrollView.contentSize = (image?.size)!
             }
 
         }
@@ -144,8 +162,6 @@ class PhotoEditorViewController : UIViewController {
             make.bottom.equalTo(view)
             make.trailing.equalTo(view)
             make.leading.equalTo(view)
-            make.width.equalTo(view)
-            make.height.equalTo(view)
         }
         scrollView.backgroundColor = UIColor.blue
         scrollView.delegate = self
@@ -157,8 +173,11 @@ class PhotoEditorViewController : UIViewController {
             make.bottom.equalTo(scrollView)
             make.trailing.equalTo(scrollView)
             make.leading.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+            make.height.equalTo(scrollView)
         }
          finderView.frame = CGRect(x: 10, y: 10, width: self.view.frame.size.width-20, height: self.view.frame.size.height - 200)
+        
         scrollView.addSubview(maskView)
         
         let realfinderView = UIView()
@@ -367,14 +386,22 @@ extension PhotoEditorViewController : UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return photoImageView
     }
-    
+//    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+//        let boundsSize = scrollView.bounds.size
+//        var frameToCenter = photoImageView.frame
+//        let widthDiff = boundsSize.width - frameToCenter.size.width
+//        let heightDiff = boundsSize.height - frameToCenter.size.height
+//        frameToCenter.origin.x = (widthDiff > 0 ) ? widthDiff / 2 : 0;
+//        frameToCenter.origin.y = (heightDiff > 0) ? heightDiff / 2 : 0;
+//        photoImageView.frame = frameToCenter
+//    }
 }
 extension PhotoEditorViewController : UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
-                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer)
-        -> Bool {
-            return true
-    }
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+//                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer)
+//        -> Bool {
+//            return true
+//    }
 }
 extension UIView{
     func addTopBorder(color: UIColor = UIColor.white, constant : CGFloat = 2 ,margins: CGFloat = 0) {
@@ -445,6 +472,13 @@ extension UIImageView {
             let scaleFactor = imageViewSize.height / imageSize.height
             let width = imageSize.width * scaleFactor
             let topLeftX = (imageViewSize.width - width) * 0.5
+            return CGRect(x: topLeftX, y: 0, width: width, height: imageViewSize.height)
+        } else {
+            let scaleFactor = imageViewSize.width / imageSize.width
+            let height = imageSize.height * scaleFactor
+            let topLeftY = (imageViewSize.height - height) * 0.5
+            
+            return CGRect(x: 0, y: topLeftY, width: imageViewSize.width, height: height)
             
         }
         return CGRect.zero

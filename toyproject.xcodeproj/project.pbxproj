@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		86019BF520FB76100018A6CA /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86019BF420FB76100018A6CA /* PhotoEditorViewController.swift */; };
+		863B1FF3210432D900BDAA0A /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 863B1FF2210432D900BDAA0A /* View.xib */; };
 		8641A3BF20EFB54A00BBC5A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3BE20EFB54A00BBC5A4 /* AppDelegate.swift */; };
 		8641A3C120EFB54A00BBC5A4 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3C020EFB54A00BBC5A4 /* HomeController.swift */; };
 		8641A3C720EFB54A00BBC5A4 /* toyproject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3C520EFB54A00BBC5A4 /* toyproject.xcdatamodeld */; };
@@ -21,11 +22,13 @@
 		8641A3FF20F21CA500BBC5A4 /* FacebookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FE20F21CA500BBC5A4 /* FacebookCell.swift */; };
 		86B5675E20F38DD600D2723A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5675D20F38DD600D2723A /* Extensions.swift */; };
 		86B5676020F4F3D800D2723A /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5675F20F4F3D800D2723A /* PostCell.swift */; };
+		86EC7DD5210470AF005802FB /* PostEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EC7DD4210470AF005802FB /* PostEditorViewController.swift */; };
 		C30C6C8835C7A55E3F24207D /* Pods_toyproject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C0FFF8C5841BACAA043A0 /* Pods_toyproject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		86019BF420FB76100018A6CA /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
+		863B1FF2210432D900BDAA0A /* View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		8641A3BB20EFB54A00BBC5A4 /* toyproject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = toyproject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8641A3BE20EFB54A00BBC5A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8641A3C020EFB54A00BBC5A4 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -41,6 +44,7 @@
 		8641A3FE20F21CA500BBC5A4 /* FacebookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookCell.swift; sourceTree = "<group>"; };
 		86B5675D20F38DD600D2723A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		86B5675F20F4F3D800D2723A /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		86EC7DD4210470AF005802FB /* PostEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorViewController.swift; sourceTree = "<group>"; };
 		87C20323049C8E74EAA126FB /* Pods-toyproject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toyproject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-toyproject/Pods-toyproject.debug.xcconfig"; sourceTree = "<group>"; };
 		D43C0FFF8C5841BACAA043A0 /* Pods_toyproject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_toyproject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE3AE8F21AC9C48370A1960 /* Pods-toyproject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toyproject.release.xcconfig"; path = "Pods/Target Support Files/Pods-toyproject/Pods-toyproject.release.xcconfig"; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				8641A3FE20F21CA500BBC5A4 /* FacebookCell.swift */,
 				86B5675D20F38DD600D2723A /* Extensions.swift */,
 				86019BF420FB76100018A6CA /* PhotoEditorViewController.swift */,
+				863B1FF2210432D900BDAA0A /* View.xib */,
+				86EC7DD4210470AF005802FB /* PostEditorViewController.swift */,
 			);
 			path = toyproject;
 			sourceTree = "<group>";
@@ -176,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8641A3CC20EFB55000BBC5A4 /* LaunchScreen.storyboard in Resources */,
+				863B1FF3210432D900BDAA0A /* View.xib in Resources */,
 				8641A3C920EFB55000BBC5A4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8641A3FD20F210EC00BBC5A4 /* TrendingCell.swift in Sources */,
+				86EC7DD5210470AF005802FB /* PostEditorViewController.swift in Sources */,
 				8641A3C120EFB54A00BBC5A4 /* HomeController.swift in Sources */,
 				86019BF520FB76100018A6CA /* PhotoEditorViewController.swift in Sources */,
 				8641A3F720F1E75B00BBC5A4 /* FeedCell.swift in Sources */,
@@ -385,7 +393,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sesang06.toyproject1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sesang06.toyproject123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
@@ -407,7 +415,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sesang06.toyproject1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sesang06.toyproject123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;

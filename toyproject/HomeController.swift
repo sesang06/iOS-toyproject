@@ -32,11 +32,22 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
     
         navigationController?.navigationBar.isTranslucent = false
+        let postButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.edit, target: self, action: #selector(actionPost))
+        self.navigationItem.leftBarButtonItem = postButton
+        
         setupCollectionView()
        // self.navigationController?.hidesBarsOnSwipe = true
         setupMenuBar()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    @objc func actionPost(sender : Any){
+        let vc = PostEditorViewController()
+        let navController = UINavigationController(rootViewController: vc) // Creating a navigation controller with resultController at the root of the navigation stack.
+        self.present(navController, animated: true, completion: nil)
+        
+    }
+    
     func setupCollectionView(){
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.scrollDirection = .horizontal
