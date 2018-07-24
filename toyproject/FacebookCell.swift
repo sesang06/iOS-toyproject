@@ -1,10 +1,4 @@
-//
-//  FacebookCell.swift
-//  toyproject
-//
-//  Created by polycube on 2018. 7. 8..
-//  Copyright © 2018년 sesang06. All rights reserved.
-//
+
 
 import Foundation
 import UIKit

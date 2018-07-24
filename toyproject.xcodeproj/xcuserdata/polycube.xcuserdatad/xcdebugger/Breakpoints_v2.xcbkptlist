@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "toyproject/TrendingCell.swift"
-            timestampString = "552932337.483758"
+            timestampString = "554029846.29724"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
             landmarkName = "content"
             landmarkType = "24">
          </BreakpointContent>

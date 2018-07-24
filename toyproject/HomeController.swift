@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  toyproject
-//
-//  Created by polycube on 2018. 7. 6..
-//  Copyright © 2018년 sesang06. All rights reserved.
-//
 
 import UIKit
 import SnapKit
@@ -131,6 +124,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         // Dispose of any resources that can be recreated.
     }
 }
+
 
 extension HomeController : EditPhotoProtocol {
     func editPhoto(postContent: PostContent?) {

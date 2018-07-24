@@ -1,10 +1,4 @@
-//
-//  Extensions.swift
-//  toyproject
-//
-//  Created by polycube on 2018. 7. 9..
-//  Copyright © 2018년 sesang06. All rights reserved.
-//
+
 
 import Foundation
 import UIKit

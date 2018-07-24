@@ -1,10 +1,3 @@
-//
-//  TrendingCell.swift
-//  toyproject
-//
-//  Created by polycube on 2018. 7. 8..
-//  Copyright © 2018년 sesang06. All rights reserved.
-// 페이스북 스타일로 꾸며보자
 
 import Foundation
 
