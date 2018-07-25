@@ -25,6 +25,7 @@
 		86BB34612104B95F002351F8 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB34602104B95F002351F8 /* PostTableViewController.swift */; };
 		86BB346321058EAF002351F8 /* PostEditorPhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB346221058EAF002351F8 /* PostEditorPhotoCollectionView.swift */; };
 		86BB34672105CD9E002351F8 /* PostEditorPhotoPreviewCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB34662105CD9E002351F8 /* PostEditorPhotoPreviewCollectionView.swift */; };
+		86BB3479210869E1002351F8 /* PostEditorPhotoPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB3478210869E1002351F8 /* PostEditorPhotoPickerController.swift */; };
 		86EC7DD5210470AF005802FB /* PostEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EC7DD4210470AF005802FB /* PostEditorViewController.swift */; };
 		C30C6C8835C7A55E3F24207D /* Pods_toyproject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43C0FFF8C5841BACAA043A0 /* Pods_toyproject.framework */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,7 @@
 		86BB34602104B95F002351F8 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
 		86BB346221058EAF002351F8 /* PostEditorPhotoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorPhotoCollectionView.swift; sourceTree = "<group>"; };
 		86BB34662105CD9E002351F8 /* PostEditorPhotoPreviewCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorPhotoPreviewCollectionView.swift; sourceTree = "<group>"; };
+		86BB3478210869E1002351F8 /* PostEditorPhotoPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorPhotoPickerController.swift; sourceTree = "<group>"; };
 		86EC7DD4210470AF005802FB /* PostEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorViewController.swift; sourceTree = "<group>"; };
 		87C20323049C8E74EAA126FB /* Pods-toyproject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toyproject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-toyproject/Pods-toyproject.debug.xcconfig"; sourceTree = "<group>"; };
 		D43C0FFF8C5841BACAA043A0 /* Pods_toyproject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_toyproject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +136,7 @@
 		86BB34752107278A002351F8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				86BB3478210869E1002351F8 /* PostEditorPhotoPickerController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				8641A3FF20F21CA500BBC5A4 /* FacebookCell.swift in Sources */,
 				86B5675E20F38DD600D2723A /* Extensions.swift in Sources */,
 				8641A3BF20EFB54A00BBC5A4 /* AppDelegate.swift in Sources */,
+				86BB3479210869E1002351F8 /* PostEditorPhotoPickerController.swift in Sources */,
 				8641A3F520F1059900BBC5A4 /* MenuBar.swift in Sources */,
 				86B5676020F4F3D800D2723A /* PostCell.swift in Sources */,
 				8641A3C720EFB54A00BBC5A4 /* toyproject.xcdatamodeld in Sources */,

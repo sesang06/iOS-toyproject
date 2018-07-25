@@ -3,6 +3,8 @@
 import Foundation
 import UIKit
 import SnapKit
+import Photos
+import MobileCoreServices
 class TextEditContent : NSObject {
     var text : String?
     var heightConstraint : Constraint?
@@ -61,7 +63,7 @@ extension TextEditCell : UITextViewDelegate {
         content?.postEditorViewController?.resizeCollectionView(height: estimatedSize.height)
     }
 }
-class PostEditorViewController  : UIViewController, UICollectionViewDelegateFlowLayout {
+class PostEditorViewController  : UIViewController{
     
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -70,7 +72,6 @@ class PostEditorViewController  : UIViewController, UICollectionViewDelegateFlow
         cv.backgroundColor = UIColor.white
         cv.dataSource = self
         cv.delegate = self
-        
         return cv
     }()
     let toolBar : UIToolbar = {
@@ -90,12 +91,17 @@ class PostEditorViewController  : UIViewController, UICollectionViewDelegateFlow
     let photoPreviewCellId = "photoPreviewCellId"
     let headerId = "headerId"
     
+    let cellid = "cellid"
+    
     let headerTextEditContent : TextEditContent = {
        let tec = TextEditContent()
         return tec
     }()
+    let imageManager = PHCachingImageManager()
     var keyboardHeightConstraint : Constraint?
     var headerView : TextEditCell?
+    var postEditorPhotoCollectionView : PostEditorPhotoCollectionView?
+    var photoSelectedPostContents : [PostContent]?
     func setUpView(){
         view.addSubview(collectionView)
         view.addSubview(toolBar)
@@ -124,7 +130,7 @@ class PostEditorViewController  : UIViewController, UICollectionViewDelegateFlow
         setUpView()
         setUpNavigationBar()
         headerTextEditContent.postEditorViewController = self
-        
+        grabPhotos()
     }
     override func viewDidAppear(_ animated: Bool) {
         registerForKeyboardNotifications()
@@ -147,41 +153,9 @@ class PostEditorViewController  : UIViewController, UICollectionViewDelegateFlow
     }
 }
 extension PostEditorViewController : UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 5
-        
-    }
+   
 
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! TextEditCell
-        header.content = headerTextEditContent
-        self.headerView = header
-        return header
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if (indexPath.item == 0){
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoCellId, for: indexPath) as! PostEditorPhotoCollectionView
-            cell.grabPhotos()
-            return cell
-        }else if (indexPath.item == 1){
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoPreviewCellId, for: indexPath) as! PostEditorPhotoPreviewCollectionView
-            cell.grabPhotos()
-            return cell
-        }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-      //  cell.backgroundColor = UIColor.red
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if (indexPath.item == 1) {
-            return CGSize(width: view.frame.width, height: 100)
-        }
-        return CGSize(width: view.frame.width, height: 200)
-    }
     func resizeCollectionView(height : CGFloat){
         if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             //
@@ -196,9 +170,78 @@ extension PostEditorViewController : UICollectionViewDelegate {
         headerView?.textView.resignFirstResponder()
     }
 }
+extension PostEditorViewController : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if (indexPath.item == 1) {
+            return CGSize(width: view.frame.width, height: 100)
+        }
+        return CGSize(width: view.frame.width, height: 200)
+    }
+}
 
 extension PostEditorViewController : UICollectionViewDataSource {
-
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView  == self.collectionView {
+            return 5
+        }else if collectionView.superview is PostEditorPhotoCollectionView {
+            return photoSelectedPostContents?.count ?? 0
+        }
+        return 0
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if (collectionView == self.collectionView){
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! TextEditCell
+            header.content = headerTextEditContent
+            self.headerView = header
+            return header
+        }
+        return UICollectionReusableView()
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if (collectionView == self.collectionView) {
+            if (indexPath.item == 0){
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoCellId, for: indexPath) as! PostEditorPhotoCollectionView
+                postEditorPhotoCollectionView = cell
+                cell.contents = self.photoSelectedPostContents
+                cell.collectionView.reloadData()
+                cell.collectionView.dataSource = cell
+                cell.grabPhotos()
+                return cell
+            }else if (indexPath.item == 1){
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: photoPreviewCellId, for: indexPath) as! PostEditorPhotoPreviewCollectionView
+                cell.delegate = self
+                
+                cell.grabPhotos()
+                return cell
+            }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+            //  cell.backgroundColor = UIColor.red
+            return cell
+        }else if let postEditorPhotoCollectionView = collectionView.superview as? PostEditorPhotoCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellid, for: indexPath) as! PostEditorPhotoCell
+           // cell.delegate = postEditorPhotoCollectionView
+            
+            if let content = photoSelectedPostContents?[indexPath.item], let asset = content.asset {
+                cell.content = content
+                cell.representedAssetIdentifier = asset.localIdentifier
+                let pixcelWidth = asset.pixelWidth
+                let pixcelHeight = asset.pixelHeight
+                let height : CGFloat = 200 - 20
+                let width = height * ( CGFloat(pixcelWidth) / CGFloat(pixcelHeight) )
+                let targetSize = CGSize(width: width , height : height )
+                imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: nil) { (image, _) in
+                    if (cell.representedAssetIdentifier == asset.localIdentifier){
+                        cell.thumbnailImageView.image = image
+                    }
+                }
+            }
+            
+            return cell
+        }
+        return UICollectionViewCell()
+    }
 }
 
 extension PostEditorViewController : UITextViewDelegate {
@@ -247,4 +290,125 @@ extension PostEditorViewController {
         }
     }
     
+}
+
+extension PostEditorViewController : PostEditorPhotoPreviewCollectionViewDelegate {
+    func cameraDidClicked() {
+        let imagePicker = UIImagePickerController()
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
+            imagePicker.sourceType = .camera
+            imagePicker.delegate = self
+            DispatchQueue.main.async {
+             self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func photoLibraryDidClicked() {
+        
+    }
+    
+    func photoContentDidClicked(_ content: PostContent) {
+        
+    }
+    
+    
+}
+extension PostEditorViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+//        switch info[UIImagePickerControllerMediaType]{
+//        case kUTTypeImage:
+//
+//            break
+//        case .none:
+//            break
+//
+//        case .some(_):
+//            break
+//        }
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(didFinishedImageSave(_:didFinishedSavingWithError:contextInfo:)), nil)
+        //
+//        if #available(iOS 11.0, *) {
+//            print(info)
+//            if let asset = info[UIImagePickerControllerPHAsset] as? PHAsset {
+//                let postContent = PostContent(type : .asset)
+//                postContent.asset = asset
+//
+//                insertSelectedPostContent(content: postContent)
+//            }
+//        } else {
+//            let fetchResult = PHAsset.fetchAssets(withALAssetURLs: [info[UIImagePickerControllerReferenceURL] as! URL], options: nil)
+//            if fetchResult.count > 0 {
+//                for i in 0..<fetchResult.count {
+//                    let asset = fetchResult.object(at: i)
+//                    let postContent = PostContent(type : .asset)
+//                    postContent.asset = asset
+//                    insertSelectedPostContent(content: postContent)
+//                }
+//            }
+//        }
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension PostEditorViewController {
+    @objc func didFinishedImageSave(_ image : UIImage?, didFinishedSavingWithError error : Error?, contextInfo : UnsafeMutableRawPointer){
+        print(image)
+        print(contextInfo)
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.fetchLimit = 1
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
+        requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.fastFormat
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        let fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
+        if fetchResult.count > 0 {
+            let asset = fetchResult.object(at: 0)
+            let postContent = PostContent(type : .asset)
+            postContent.asset = asset
+            
+            DispatchQueue.main.async {
+                self.insertSelectedPostContent(content: postContent)
+            }
+        }
+        
+    }
+    func insertSelectedPostContent(content : PostContent){
+        self.postEditorPhotoCollectionView?.insertPostContent(content: content)
+    }
+    func fetchedPostContent(){
+        self.postEditorPhotoCollectionView?.collectionView.reloadData()
+    }
+}
+extension PostEditorViewController {
+        func grabPhotos(){
+            DispatchQueue.global(qos: .background).async {
+                let fetchOptions = PHFetchOptions()
+                fetchOptions.fetchLimit = 10
+                let requestOptions = PHImageRequestOptions()
+                requestOptions.isSynchronous = true
+                requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.fastFormat
+                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+    
+                let fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
+                self.photoSelectedPostContents = [PostContent]()
+                if fetchResult.count > 0 {
+                    for i in 0..<fetchResult.count {
+                        let asset = fetchResult.object(at: i)
+                        let postContent = PostContent(type : .asset)
+                        postContent.asset = asset
+                        self.photoSelectedPostContents?.append(postContent)
+                        print(postContent)
+                    }
+                }
+    
+                DispatchQueue.main.async {
+                   self.collectionView.reloadData()
+                }
+            }
+        }
+
 }

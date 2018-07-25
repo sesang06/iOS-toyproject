@@ -104,9 +104,18 @@ class PhotoCell : BaseCell {
  //       photoImageView.isUserInteractionEnabled = true
     }
 }
+enum PostContentType {
+    case asset
+    case image
+}
 class PostContent : NSObject {
     var asset : PHAsset?
     var selectedNumber : Int?
+    var image : UIImage?
+    let type : PostContentType
+    init(type : PostContentType) {
+        self.type = type
+    }
 }
 
 class PostCell : BaseCell, UICollectionViewDataSource, UICollectionViewDelegate,
@@ -188,7 +197,7 @@ UICollectionViewDelegateFlowLayout {
             if fetchResult.count > 0 {
                 for i in 0..<fetchResult.count {
                    let asset = fetchResult.object(at: i)
-                    let postContent = PostContent()
+                    let postContent = PostContent(type : .asset)
                     postContent.asset = asset
                     self.contents?.append(postContent)
                 }

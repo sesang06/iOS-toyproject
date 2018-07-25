@@ -6,6 +6,11 @@ import Photos
 사진 목록..
  셀 크기
  */
+protocol PostEditorPhotoPreviewCollectionViewDelegate  : class {
+    func cameraDidClicked()
+    func photoLibraryDidClicked()
+    func photoContentDidClicked(_ content : PostContent)
+}
 class PostEditorPhotoBaseCell : BaseCell {
     
     override func setupViews() {
@@ -43,16 +48,13 @@ class PostEditorPhotoPreviewCell : PostEditorPhotoBaseCell {
 class PostEditorPhotoCameraCell : PostEditorPhotoBaseCell {
     let altLabel : UILabel = {
         let label = UILabel()
-        label.text = "카메라"
-        label.font = UIFont.systemFont(ofSize: 12)
+       label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
 
         return label
     }()
     let iconImageView : UIImageView = {
         let iv = UIImageView()
-        let image = UIImage(named: "camera")?.withRenderingMode(.alwaysTemplate)
-        iv.image = image
         iv.tintColor = Constants.primaryColor
         iv.contentMode = .scaleAspectFit
         return iv
@@ -83,15 +85,15 @@ class PostEditorPhotoPreviewCollectionView : BaseCell, UICollectionViewDelegateF
     let postEditorPhotoPreviewCellId = "postEditorPhotoPreviewCellId"
     var contents : [PostContent]?
     let imageManager = PHCachingImageManager()
-    
+    var delegate : PostEditorPhotoPreviewCollectionViewDelegate?
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = UIColor.white
-        cv.dataSource = self
         cv.delegate = self
         cv.showsHorizontalScrollIndicator = false
+        cv.dataSource = self
         //cv.isPagingEnabled = true
         return cv
     }()
@@ -116,11 +118,24 @@ extension PostEditorPhotoPreviewCollectionView : UICollectionViewDelegate {
         return (contents?.count ?? 0 + 2)
         
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (indexPath.item == 0){
+            self.delegate?.cameraDidClicked()
+        }else if (indexPath.item == 1){
+            self.delegate?.photoLibraryDidClicked()
+        }else {
+            if let content = contents?[indexPath.item - 2] {
+                self.delegate?.photoContentDidClicked(content)
+            }
+        }
+        collectionView.deselectItem(at: indexPath, animated: false)
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if (indexPath.item == 0 ) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: postEditorPhotoCameraCellId, for: indexPath) as! PostEditorPhotoCameraCell
+            cell.altLabel.text = "카메라"
+            cell.iconImageView.image = UIImage(named: "camera")?.withRenderingMode(.alwaysTemplate)
             return cell
         }else if (indexPath.item == 1) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: postEditorPhotoCameraCellId, for: indexPath) as! PostEditorPhotoCameraCell
@@ -170,8 +185,8 @@ extension PostEditorPhotoPreviewCollectionView {
             self.contents = [PostContent]()
             if fetchResult.count > 0 {
                 for i in 0..<fetchResult.count {
-                    let asset = fetchResult.object(at: i)
-                    let postContent = PostContent()
+                    let asset = fetchResult.object(at: i) 
+                    let postContent = PostContent(type : .asset)
                     postContent.asset = asset
                     self.contents?.append(postContent)
                 }
@@ -186,3 +201,4 @@ extension PostEditorPhotoPreviewCollectionView {
 extension PostEditorPhotoPreviewCollectionView : UICollectionViewDataSource {
     
 }
+

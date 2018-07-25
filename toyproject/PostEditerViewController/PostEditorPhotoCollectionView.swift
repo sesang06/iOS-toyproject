@@ -4,6 +4,7 @@ import Foundation
 import UIKit
 import SnapKit
 import Photos
+
 protocol PostEditorPhotoCellDelegate : class {
     func deletePhotoCell(_ sender: PostEditorPhotoCell)
     func editPhotoCell(_ sender: PostEditorPhotoCell)
@@ -89,8 +90,9 @@ class PostEditorPhotoCollectionView : BaseCell, UICollectionViewDelegateFlowLayo
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = UIColor.white
-        cv.dataSource = self
+       // cv.dataSource = self
         cv.delegate = self
+        cv.showsHorizontalScrollIndicator = false
         cv.isPagingEnabled = true
         return cv
     }()
@@ -116,6 +118,7 @@ extension PostEditorPhotoCollectionView : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellid, for: indexPath) as! PostEditorPhotoCell
         cell.delegate = self
+        
         if let content = contents?[indexPath.item], let asset = content.asset {
             cell.content = content
             cell.representedAssetIdentifier = asset.localIdentifier
@@ -152,7 +155,7 @@ extension PostEditorPhotoCollectionView : UICollectionViewDelegate {
 }
 
 extension PostEditorPhotoCollectionView : UICollectionViewDataSource {
-    
+
 }
 extension PostEditorPhotoCollectionView {
     func grabPhotos(){
@@ -163,18 +166,18 @@ extension PostEditorPhotoCollectionView {
             requestOptions.isSynchronous = true
             requestOptions.deliveryMode = PHImageRequestOptionsDeliveryMode.fastFormat
             fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-            
+
             let fetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: fetchOptions)
             self.contents = [PostContent]()
             if fetchResult.count > 0 {
                 for i in 0..<fetchResult.count {
                     let asset = fetchResult.object(at: i)
-                    let postContent = PostContent()
+                    let postContent = PostContent(type : .asset)
                     postContent.asset = asset
                     self.contents?.append(postContent)
                 }
             }
-            
+
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -184,7 +187,6 @@ extension PostEditorPhotoCollectionView {
 extension PostEditorPhotoCollectionView : PostEditorPhotoCellDelegate {
     func deletePhotoCell(_ sender: PostEditorPhotoCell) {
         guard let tappedIndexPath = collectionView.indexPath(for: sender) else { return }
-        print("Heart", sender, tappedIndexPath)
         contents?.remove(at: tappedIndexPath.item)
         collectionView.deleteItems(at: [tappedIndexPath])
         // "Love" this item
@@ -196,3 +198,14 @@ extension PostEditorPhotoCollectionView : PostEditorPhotoCellDelegate {
     }
     
 }
+extension PostEditorPhotoCollectionView {
+    func insertPostContent(content : PostContent){
+//        contents?.append(content)
+        contents?.insert(content, at: 0)
+        if let index = contents?.index(of: content){
+            let indexPath = IndexPath(row: index, section: 0)
+            collectionView.insertItems(at: [indexPath])
+        }
+    }
+}
+
