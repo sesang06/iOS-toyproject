@@ -7,6 +7,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     let feedCellId = "feedCellID"
     let facebookCellId = "facebookCellID"
     let postCellId = "postCellID"
+    let gameCellId = "gameCellID"
+    let bookCellId = "bookCellId"
     let titles = ["피드", "페이스북", "히히", "후호"]
     
     lazy var menuBar : MenuBar = {
@@ -18,13 +20,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-      //  navigationItem.title = "호호"
         navigationController?.navigationBar.tintColor = Constants.primaryDarkColor
        navigationController?.navigationBar.titleTextAttributes = [ NSAttributedStringKey.foregroundColor : Constants.primaryTextColor]
-        
+      //  navigationItem.title = "게임"
     
-        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.navigationBar.isTranslucent = false
         let postButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.edit, target: self, action: #selector(actionPost))
         self.navigationItem.leftBarButtonItem = postButton
         
@@ -46,14 +46,17 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             flowLayout.scrollDirection = .horizontal
             flowLayout.minimumLineSpacing = 0
         }
+        collectionView?.register(GameViewController.self, forCellWithReuseIdentifier: gameCellId)
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: feedCellId)
         collectionView?.register(FacebookCell.self, forCellWithReuseIdentifier: facebookCellId)
         collectionView?.register(PostCell.self, forCellWithReuseIdentifier: postCellId )
+        collectionView?.register(BookViewController.self, forCellWithReuseIdentifier: bookCellId )
+        
         collectionView?.backgroundColor = UIColor.white
         
         
-        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
-        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        collectionView?.contentInset = UIEdgeInsetsMake(50+50, 0, 0, 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50+50, 0, 0, 0)
         
         collectionView?.isPagingEnabled = true
         
@@ -95,17 +98,21 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let identifier : String
-        if (indexPath.item == 1){
+        if (indexPath.item == 0){
+            identifier = gameCellId
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! GameViewController
+            cell.delegate = self
+            return cell
+        }else if (indexPath.item == 1){
             identifier = feedCellId
         }else if (indexPath.item == 2){
             identifier = facebookCellId
         }else if (indexPath.item == 3){
-            identifier = postCellId
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PostCell
             
+            identifier = bookCellId
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! BookViewController
             cell.delegate = self
             return cell
-            
         }else{
             identifier = feedCellId
         }
@@ -134,4 +141,30 @@ extension HomeController : EditPhotoProtocol {
         self.present(navController, animated: true, completion: nil)
         
     }
+}
+
+extension HomeController : GameViewControllerDelegate {
+    func gameContentDidClicked(_ gameContent: GameContent?) {
+        let vc = GameDetailViewController()
+        vc.content = gameContent
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
+extension HomeController : BookViewControllerDelegate {
+    func bookContentDidClicked(_ bookContent: BookContent?) {
+        let vc = BookDetailViewController()
+        vc.content = bookContent
+//        let transition = CATransition()
+//        transition.duration = 0.5
+//        transition.type = kCATransitionReveal
+//        transition.subtype = kCATransitionFromLeft
+//        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+//        view.window?.layer.add(transition, forKey: kCATransition)
+//
+        self.navigationController?.pushViewController(vc, animated: true)
+//        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
+    
+    
 }

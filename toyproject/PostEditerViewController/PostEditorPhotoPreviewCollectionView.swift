@@ -48,9 +48,8 @@ class PostEditorPhotoPreviewCell : PostEditorPhotoBaseCell {
 class PostEditorPhotoCameraCell : PostEditorPhotoBaseCell {
     let altLabel : UILabel = {
         let label = UILabel()
-       label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)
-
         return label
     }()
     let iconImageView : UIImageView = {
@@ -158,9 +157,6 @@ extension PostEditorPhotoPreviewCollectionView : UICollectionViewDelegate {
             
             
         }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellid, for: indexPath)
-         cell.backgroundColor = UIColor.red
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

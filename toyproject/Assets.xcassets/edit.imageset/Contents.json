@@ -2,10 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "outline_create_black_48pt_1x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "outline_create_black_48pt_2x.png",
       "scale" : "2x"
     },
     {

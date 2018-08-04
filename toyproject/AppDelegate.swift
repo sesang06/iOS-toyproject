@@ -14,32 +14,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         let layout = UICollectionViewFlowLayout()
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
-        UINavigationBar.appearance().backgroundColor = Constants.primaryDarkColor
+//        UINavigationBar.appearance().backgroundColor = Constants.primaryDarkColor
        // UINavigationBar.appearance().titleTextAttributes = [ NSAttributedStringKey.foregroundColor : Constants.primaryTextColor]
         
-        UINavigationBar.appearance().barTintColor = Constants.primaryColor
-        // get rid of black bar
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        
+//        UINavigationBar.appearance().barTintColor = Constants.primaryColor
+//        // get rid of black bar
+//        UINavigationBar.appearance().shadowImage = UIImage()
+//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+//        
         
         application.statusBarStyle = .lightContent
         
-        let statusBarBackgroundView = UIView()
-        statusBarBackgroundView.backgroundColor = Constants.primaryDarkColor
+//        let statusBarBackgroundView = UIView()
+//        statusBarBackgroundView.backgroundColor = Constants.primaryDarkColor
         
-        window?.addSubview(statusBarBackgroundView)
+//        window?.addSubview(statusBarBackgroundView)
         
-        statusBarBackgroundView.snp.makeConstraints { (make) in
-            make.top.equalTo((window?.snp.top)!)
-            make.leading.equalTo((window?.snp.leading)!)
-            make.trailing.equalTo((window?.snp.trailing)!)
-            make.height.equalTo(20)
-        }
-        /*window?.addConstraintsWithFormat("H:|[v0]|", views: statusBarBackgroundView)
+//        statusBarBackgroundView.snp.makeConstraints { (make) in
+//            make.top.equalTo((window?.snp.top)!)
+//            make.leading.equalTo((window?.snp.leading)!)
+//            make.trailing.equalTo((window?.snp.trailing)!)
+//            make.height.equalTo(20)
+//        }
+//        /*window?.addConstraintsWithFormat("H:|[v0]|", views: statusBarBackgroundView)
     
-        window?.addConstraintsWithFormat("V:|[v0(20)]|", views: statusBarBackgroundView)
- */
+//        window?.addConstraintsWithFormat("V:|[v0(20)]|", views: statusBarBackgroundView)
+// */
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         

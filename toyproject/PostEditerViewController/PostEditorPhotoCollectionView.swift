@@ -108,55 +108,55 @@ class PostEditorPhotoCollectionView : BaseCell, UICollectionViewDelegateFlowLayo
     }
 }
 
-extension PostEditorPhotoCollectionView : UICollectionViewDelegate {
-   
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return contents?.count ?? 0
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellid, for: indexPath) as! PostEditorPhotoCell
-        cell.delegate = self
-        
-        if let content = contents?[indexPath.item], let asset = content.asset {
-            cell.content = content
-            cell.representedAssetIdentifier = asset.localIdentifier
-            let pixcelWidth = asset.pixelWidth
-            let pixcelHeight = asset.pixelHeight
-            let height : CGFloat = 200 - 20
-            let width = height * ( CGFloat(pixcelWidth) / CGFloat(pixcelHeight) )
-            let targetSize = CGSize(width: width , height : height )
-            imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: nil) { (image, _) in
-                if (cell.representedAssetIdentifier == asset.localIdentifier){
-                    cell.thumbnailImageView.image = image
-                }
-            }
-        }
-        
-        return cell
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if let content = contents?[indexPath.item], let asset = content.asset{
-            let pixcelWidth = asset.pixelWidth
-            let pixcelHeight = asset.pixelHeight
-            let height : CGFloat = 200 - 20
-            let width = height * ( CGFloat(pixcelWidth) / CGFloat(pixcelHeight) )
-            return CGSize(width: width, height: height)
-        }
-        return CGSize(width: 200, height: 200-20)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(10, 10, 10, 10)
-    }
-    
-}
-
-extension PostEditorPhotoCollectionView : UICollectionViewDataSource {
-
-}
+//extension PostEditorPhotoCollectionView : UICollectionViewDelegate {
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return contents?.count ?? 0
+//    }
+//
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellid, for: indexPath) as! PostEditorPhotoCell
+//        cell.delegate = self
+//
+//        if let content = contents?[indexPath.item], let asset = content.asset {
+//            cell.content = content
+//            cell.representedAssetIdentifier = asset.localIdentifier
+//            let pixcelWidth = asset.pixelWidth
+//            let pixcelHeight = asset.pixelHeight
+//            let height : CGFloat = 200 - 20
+//            let width = height * ( CGFloat(pixcelWidth) / CGFloat(pixcelHeight) )
+//            let targetSize = CGSize(width: width , height : height )
+//            imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: nil) { (image, _) in
+//                if (cell.representedAssetIdentifier == asset.localIdentifier){
+//                    cell.thumbnailImageView.image = image
+//                }
+//            }
+//        }
+//
+//        return cell
+//
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        if let content = contents?[indexPath.item], let asset = content.asset{
+//            let pixcelWidth = asset.pixelWidth
+//            let pixcelHeight = asset.pixelHeight
+//            let height : CGFloat = 200 - 20
+//            let width = height * ( CGFloat(pixcelWidth) / CGFloat(pixcelHeight) )
+//            return CGSize(width: width, height: height)
+//        }
+//        return CGSize(width: 200, height: 200-20)
+//    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsetsMake(10, 10, 10, 10)
+//    }
+//
+//}
+//
+//extension PostEditorPhotoCollectionView : UICollectionViewDataSource {
+//
+//}
 extension PostEditorPhotoCollectionView {
     func grabPhotos(){
         DispatchQueue.global(qos: .background).async {
@@ -184,28 +184,5 @@ extension PostEditorPhotoCollectionView {
         }
     }
 }
-extension PostEditorPhotoCollectionView : PostEditorPhotoCellDelegate {
-    func deletePhotoCell(_ sender: PostEditorPhotoCell) {
-        guard let tappedIndexPath = collectionView.indexPath(for: sender) else { return }
-        contents?.remove(at: tappedIndexPath.item)
-        collectionView.deleteItems(at: [tappedIndexPath])
-        // "Love" this item
-        
-    }
-    
-    func editPhotoCell(_ sender: PostEditorPhotoCell) {
-        
-    }
-    
-}
-extension PostEditorPhotoCollectionView {
-    func insertPostContent(content : PostContent){
-//        contents?.append(content)
-        contents?.insert(content, at: 0)
-        if let index = contents?.index(of: content){
-            let indexPath = IndexPath(row: index, section: 0)
-            collectionView.insertItems(at: [indexPath])
-        }
-    }
-}
+
 

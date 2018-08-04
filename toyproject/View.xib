@@ -16,43 +16,31 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8l-Vl-kxg">
+                    <rect key="frame" x="0.0" y="308" width="375" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Bbz-qb-zBq"/>
+                    </constraints>
+                    <mutableString key="text">LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLaLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelbelLabelLabelLabel</mutableString>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mBy-1K-XAL">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="land" translatesAutoresizingMaskIntoConstraints="NO" id="zeP-wL-gwI">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ilp-j9-rJV">
-                            <rect key="frame" x="67" y="332" width="240" height="128"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mCf-ek-KJM">
-                            <rect key="frame" x="127" y="259" width="240" height="128"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </view>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="zeP-wL-gwI" firstAttribute="leading" secondItem="mBy-1K-XAL" secondAttribute="leading" id="5xQ-1R-CjJ"/>
-                        <constraint firstItem="zeP-wL-gwI" firstAttribute="width" secondItem="mBy-1K-XAL" secondAttribute="width" id="A5a-pg-dJc"/>
-                        <constraint firstAttribute="bottom" secondItem="zeP-wL-gwI" secondAttribute="bottom" id="V2I-03-pXs"/>
-                        <constraint firstAttribute="trailing" secondItem="zeP-wL-gwI" secondAttribute="trailing" id="YdZ-hm-7xh"/>
-                        <constraint firstItem="zeP-wL-gwI" firstAttribute="height" secondItem="mBy-1K-XAL" secondAttribute="height" id="pRL-A7-lPd"/>
-                        <constraint firstItem="zeP-wL-gwI" firstAttribute="top" secondItem="mBy-1K-XAL" secondAttribute="top" id="tgP-1I-kuQ"/>
-                    </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="O8l-Vl-kxg" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="288" id="2l1-z2-Kyw"/>
+                <constraint firstItem="O8l-Vl-kxg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Kg8-QD-8i2"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="mBy-1K-XAL" secondAttribute="bottom" id="RDu-Po-yBz"/>
                 <constraint firstItem="mBy-1K-XAL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="VyD-MU-kIE"/>
+                <constraint firstItem="O8l-Vl-kxg" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="eyt-2J-bXi"/>
                 <constraint firstItem="mBy-1K-XAL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="jUM-XX-asp"/>
                 <constraint firstAttribute="trailing" secondItem="mBy-1K-XAL" secondAttribute="trailing" id="sTo-9m-dce"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
         </view>
     </objects>
-    <resources>
-        <image name="land" width="233" height="142"/>
-    </resources>
 </document>

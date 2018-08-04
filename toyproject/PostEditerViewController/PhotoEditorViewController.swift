@@ -475,6 +475,5 @@ extension UIImageView {
             return CGRect(x: 0, y: topLeftY, width: imageViewSize.width, height: height)
             
         }
-        return CGRect.zero
     }
 }

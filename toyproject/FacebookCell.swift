@@ -69,7 +69,6 @@ class FacebookCell : UICollectionViewCell, UICollectionViewDataSource, UICollect
         fatalError("init(coder:) has not been implemented")
     }
     func setupViews(){
-        backgroundColor = .brown
         setupContents()
         addSubview(collectionView)
         

@@ -39,14 +39,19 @@ class PostEditorPhotoPickerController : UIViewController {
             if fetchResult.count > 0 {
                 for i in 0..<fetchResult.count {
                     let asset = fetchResult.object(at: i)
-                    let selected = self.photoSelectedPostContents?.filter { $0.asset?.localIdentifier == asset.localIdentifier }
-                    if let selected = selected {
-                        self.contents?.append(contentsOf: selected)
-                    }else {
-                        let postContent = PostContent(type : .asset)
-                        postContent.asset = asset
-                        self.contents?.append(postContent)
-                    }
+                    print(asset)
+                    let postContent = PostContent(type : .asset)
+                    postContent.asset = asset
+                    self.contents?.append(postContent)
+                    
+               //     let selected = self.photoSelectedPostContents?.filter { $0.asset?.localIdentifier == asset.localIdentifier }
+//                    if let selected = selected {
+//                        self.contents?.append(contentsOf: selected)
+//                    }else {
+//                        let postContent = PostContent(type : .asset)
+//                        postContent.asset = asset
+//                        self.contents?.append(postContent)
+//                    }
                 }
             }
             
@@ -79,12 +84,22 @@ class PostEditorPhotoPickerController : UIViewController {
         let dissmissButon = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(actionDismiss))
         self.navigationItem.leftBarButtonItem = dissmissButon
         let okButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(actionFinish))
+        self.navigationItem.rightBarButtonItem = okButton
     }
     @objc func actionDismiss(_ sender : Any){
         self.dismiss(animated: true, completion: nil)
     }
     @objc func actionFinish(_ sender : Any){
-        self.delegate?.postEditorPhotoPickerController(self, didFinishPickingContents: photoSelectedPostContents)
+        let indexPaths = collectionView.indexPathsForSelectedItems
+        var pickingContents = [PostContent]()
+        indexPaths?.forEach({ (indexPath) in
+            if let content = contents?[indexPath.item]{
+                pickingContents.append(content)
+                
+            }
+        })
+        
+        self.delegate?.postEditorPhotoPickerController(self, didFinishPickingContents: pickingContents)
     }
 }
 
