@@ -8,7 +8,7 @@ protocol EditPhotoProtocol : NSObjectProtocol {
     func editPhoto(postContent : PostContent?) -> Void;
 }
 
-class PhotoCell : BaseCell {
+class PostEditPhotoCell : BaseCell {
     override var isSelected : Bool {
         didSet {
             blackView.layer.opacity = isSelected ?  0.5 : 0
@@ -230,7 +230,7 @@ UICollectionViewDelegateFlowLayout {
             make.bottom.equalTo(self)
         }
         
-        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(PostEditPhotoCell.self, forCellWithReuseIdentifier: cellId)
         checkPhotoLibraryPermission()
     }
     
@@ -240,7 +240,7 @@ UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PhotoCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PostEditPhotoCell
        
         if let content = contents?[indexPath.item], let asset = content.asset {
             cell.postContent = content
@@ -283,7 +283,7 @@ UICollectionViewDelegateFlowLayout {
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! PhotoCell
+        let cell = collectionView.cellForItem(at: indexPath) as! PostEditPhotoCell
         
         let count = collectionView.indexPathsForSelectedItems?.count ?? 0
         
@@ -312,7 +312,7 @@ UICollectionViewDelegateFlowLayout {
         
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! PhotoCell
+        let cell = collectionView.cellForItem(at: indexPath) as! PostEditPhotoCell
         
         UIView.animate(withDuration : 0.25,
                        delay: 0,
@@ -342,7 +342,7 @@ UICollectionViewDelegateFlowLayout {
         }
         if let  indexPaths = indexPaths {
             for ( index, indexPath) in indexPaths.enumerated() {
-                if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell {
+                if let cell = collectionView.cellForItem(at: indexPath) as? PostEditPhotoCell {
                     cell.selectedNumber = index + 1
                 }
                 if let content = contents?[indexPath.item]{

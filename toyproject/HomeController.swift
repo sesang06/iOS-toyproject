@@ -20,6 +20,11 @@ class HomeController: UIViewController, UICollectionViewDelegateFlowLayout , UIC
         mb.homeController = self
         return mb
     }()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("viewDidAppear")
+        self.navigationController?.navigationBar.layer.zPosition = 0
+    }
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         
@@ -30,6 +35,7 @@ class HomeController: UIViewController, UICollectionViewDelegateFlowLayout , UIC
         
         return cv
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,7 +76,7 @@ class HomeController: UIViewController, UICollectionViewDelegateFlowLayout , UIC
             flowLayout.minimumLineSpacing = 0
         }
         collectionView.register(GameViewController.self, forCellWithReuseIdentifier: gameCellId)
-        collectionView.register(FeedCell.self, forCellWithReuseIdentifier: feedCellId)
+        collectionView.register(PhotoViewController.self, forCellWithReuseIdentifier: feedCellId)
         collectionView.register(MovieViewController.self, forCellWithReuseIdentifier: facebookCellId)
         collectionView.register(PostCell.self, forCellWithReuseIdentifier: postCellId )
         collectionView.register(BookViewController.self, forCellWithReuseIdentifier: bookCellId )
@@ -190,6 +196,12 @@ extension HomeController : BookViewControllerDelegate {
 }
 
 extension HomeController : MovieCellDelegate {
+    func movieContentDidClicked(_ movieContent: MovieContent?) {
+        let vc = MovieDetailViewController()
+        vc.content = movieContent
+//        self.navigationController?.navigationBar.layer.zPosition = 0
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     func thumbnailImageViewDidTapped(_ imageView: UIImageView, _ movieContent: MovieContent?) {
         self.touchedImageView = imageView
         if let startingFrame = imageView.superview?.convert(imageView.frame, to: nil){

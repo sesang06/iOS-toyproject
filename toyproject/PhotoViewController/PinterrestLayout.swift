@@ -3,7 +3,7 @@ import Foundation
 import UIKit
 import SnapKit
 protocol  PinterestLayoutDelegate : class {
-    func collectionView(collectionView : UICollectionView, heightForItemAtIndexPath indexPath : NSIndexPath)-> CGFloat
+    func collectionView(collectionView : UICollectionView, heightForItemAtIndexPath indexPath : IndexPath)-> CGFloat
 }
 class PinterrestLayout : UICollectionViewLayout {
     var delegate : PinterestLayoutDelegate!
@@ -32,7 +32,7 @@ class PinterrestLayout : UICollectionViewLayout {
             var yOffset = [CGFloat](repeating: 0, count: numberOfColumns)
             var column = 0
             for item in 0..<collectionView!.numberOfItems(inSection: 0){
-                let indexPath = NSIndexPath(item: item, section: 0)
+                let indexPath = IndexPath(item: item, section: 0)
                 let height = delegate.collectionView(collectionView: collectionView!, heightForItemAtIndexPath: indexPath)
                 let frame = CGRect(x: xOffsets[column], y: yOffset[column], width : columnWidth, height : height)
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath as IndexPath)

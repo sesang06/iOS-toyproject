@@ -9,6 +9,23 @@ class GameContent : NSObject {
 }
 
 class GameCell : BaseCell {
+    override var isHighlighted: Bool {
+        didSet {
+            if (isHighlighted){
+                UIView.animate(withDuration: 0.75) {
+                    self.backgroundColor = UIColor.rgb(226, green: 228, blue: 232)
+                    self.titleTextView.backgroundColor = UIColor.rgb(226, green: 228, blue: 232)
+                    self.contentTextView.backgroundColor = UIColor.rgb(226, green: 228, blue: 232)
+                }
+            }else {
+                UIView.animate(withDuration: 0.75) {
+                    self.backgroundColor = UIColor.white
+                    self.titleTextView.backgroundColor = UIColor.white
+                    self.contentTextView.backgroundColor = UIColor.white
+                  }
+            }
+        }
+    }
     var content : GameContent? {
         didSet {
             titleTextView.text = content?.title
@@ -52,6 +69,7 @@ class GameCell : BaseCell {
         tv.textContainer.lineFragmentPadding = 0
         tv.isScrollEnabled = false
         tv.isEditable = false
+        tv.isUserInteractionEnabled = false
        // tv.backgroundColor = UIColor.brown
         return tv
     }()
@@ -69,10 +87,10 @@ class GameCell : BaseCell {
         tv.textColor = UIColor.black
         tv.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0)
         tv.textContainer.lineFragmentPadding = 0
-        //tv.backgroundColor = UIColor.gray
         tv.text = "젤다의 전설젤다의 전설젤다의 전설젤다의 전설젤다의 전설"
         tv.isScrollEnabled = false
         tv.isEditable = false
+        tv.isUserInteractionEnabled = false
         return tv
     }()
     let deviderLineView : UIView = {

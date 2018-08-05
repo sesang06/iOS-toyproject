@@ -74,7 +74,7 @@ class PostEditorPhotoPickerController : UIViewController {
             make.bottom.equalTo(self.view)
         }
         
-        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(PostEditPhotoCell.self, forCellWithReuseIdentifier: cellId)
        
     }
     func setUpNavigationBar(){
@@ -113,7 +113,7 @@ extension PostEditorPhotoPickerController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PhotoCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PostEditPhotoCell
         
         if let content = contents?[indexPath.item], let asset = content.asset {
             cell.postContent = content
@@ -156,7 +156,7 @@ extension PostEditorPhotoPickerController : UICollectionViewDataSource {
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! PhotoCell
+        let cell = collectionView.cellForItem(at: indexPath) as! PostEditPhotoCell
         
         let count = collectionView.indexPathsForSelectedItems?.count ?? 0
         
@@ -185,7 +185,7 @@ extension PostEditorPhotoPickerController : UICollectionViewDataSource {
         
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! PhotoCell
+        let cell = collectionView.cellForItem(at: indexPath) as! PostEditPhotoCell
         
         UIView.animate(withDuration : 0.25,
                        delay: 0,
@@ -215,7 +215,7 @@ extension PostEditorPhotoPickerController : UICollectionViewDataSource {
         }
         if let  indexPaths = indexPaths {
             for ( index, indexPath) in indexPaths.enumerated() {
-                if let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell {
+                if let cell = collectionView.cellForItem(at: indexPath) as? PostEditPhotoCell {
                     cell.selectedNumber = index + 1
                 }
                 if let content = contents?[indexPath.item]{

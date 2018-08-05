@@ -15,6 +15,19 @@ class BookContent : NSObject {
 }
 
 class BookCell : BaseCell {
+    override var isHighlighted: Bool {
+        didSet {
+            if (isHighlighted){
+                UIView.animate(withDuration: 0.75) {
+                    self.backgroundColor = UIColor.rgb(226, green: 228, blue: 232)
+                }
+            }else {
+                UIView.animate(withDuration: 0.75) {
+                    self.backgroundColor = UIColor.white
+                }
+            }
+        }
+    }
     var content : BookContent? {
         didSet {
             //titleTextView.text = content?.title
@@ -171,8 +184,53 @@ class BookViewController : BaseCell {
             return gc
         }()
 
+        let e : BookContent = {
+            let gc = BookContent()
+            gc.title = "나미야 잡화점의 기적(100만 부 기념 특별 한정판) "
+            gc.thumbnailImageName = "namiya"
+            gc.createdTime = Date()
+            gc.content = "따뜻한 고민 상담실 ‘나미야 잡화점’으로 오세요!\n일본을 대표하는 소설가 히가시노 게이고의 신작 『나미야 잡화점의 기적』. 2012년 일본 중앙공론문예상 수상작으로, 작가가 그동안 추구해온 인간 내면에 잠재한 선의에 대한 믿음이 작품 전반에 녹아 있다. 오래된 잡화점을 배경으로, 기묘한 편지를 주고받는다는 설정을 통해 따뜻한 이야기를 들려준다.\n30여 년간 비어 있던 오래된 가게인 나미야 잡화점. 어느 날 그곳에 경찰의 눈을 피해 달아나던 삼인조 도둑이 숨어든다. 난데없이 ‘나미야 잡화점 주인’ 앞으로 의문의 편지 한 통이 도착하고, 세 사람은 얼떨결에 편지를 열어본다. 처음에는 장난이라고 생각하던 세 사람은 어느새 편지 내용에 이끌려 답장을 해주기 시작하는데…."
+            gc.price = 19240
+            gc.index = "제1장 답장은 우유 상자에\n제2장 한밤중에 하모니카를\n제3장 시빅 자동차에서 아침까지\n제4장 묵도는 비틀스로\n제5장 하늘 위에서 기도를\n옮긴이의 말"
+            gc.author = "히가시노 게이고"
+            gc.grade = 5.5
+            gc.publisher = "현대문학"
+            return gc
+        }()
+
+        let f : BookContent = {
+            let gc = BookContent()
+            gc.title = "나미야 잡화점의 기적(100만 부 기념 특별 한정판) "
+            gc.thumbnailImageName = "namiya"
+            gc.createdTime = Date()
+            gc.content = "따뜻한 고민 상담실 ‘나미야 잡화점’으로 오세요!\n일본을 대표하는 소설가 히가시노 게이고의 신작 『나미야 잡화점의 기적』. 2012년 일본 중앙공론문예상 수상작으로, 작가가 그동안 추구해온 인간 내면에 잠재한 선의에 대한 믿음이 작품 전반에 녹아 있다. 오래된 잡화점을 배경으로, 기묘한 편지를 주고받는다는 설정을 통해 따뜻한 이야기를 들려준다.\n30여 년간 비어 있던 오래된 가게인 나미야 잡화점. 어느 날 그곳에 경찰의 눈을 피해 달아나던 삼인조 도둑이 숨어든다. 난데없이 ‘나미야 잡화점 주인’ 앞으로 의문의 편지 한 통이 도착하고, 세 사람은 얼떨결에 편지를 열어본다. 처음에는 장난이라고 생각하던 세 사람은 어느새 편지 내용에 이끌려 답장을 해주기 시작하는데…."
+            gc.price = 19240
+            gc.index = "제1장 답장은 우유 상자에\n제2장 한밤중에 하모니카를\n제3장 시빅 자동차에서 아침까지\n제4장 묵도는 비틀스로\n제5장 하늘 위에서 기도를\n옮긴이의 말"
+            gc.author = "히가시노 게이고"
+            gc.grade = 5.5
+            gc.publisher = "현대문학"
+            return gc
+        }()
+
+        let g : BookContent = {
+            let gc = BookContent()
+            gc.title = "나미야 잡화점의 기적(100만 부 기념 특별 한정판) "
+            gc.thumbnailImageName = "namiya"
+            gc.createdTime = Date()
+            gc.content = "따뜻한 고민 상담실 ‘나미야 잡화점’으로 오세요!\n일본을 대표하는 소설가 히가시노 게이고의 신작 『나미야 잡화점의 기적』. 2012년 일본 중앙공론문예상 수상작으로, 작가가 그동안 추구해온 인간 내면에 잠재한 선의에 대한 믿음이 작품 전반에 녹아 있다. 오래된 잡화점을 배경으로, 기묘한 편지를 주고받는다는 설정을 통해 따뜻한 이야기를 들려준다.\n30여 년간 비어 있던 오래된 가게인 나미야 잡화점. 어느 날 그곳에 경찰의 눈을 피해 달아나던 삼인조 도둑이 숨어든다. 난데없이 ‘나미야 잡화점 주인’ 앞으로 의문의 편지 한 통이 도착하고, 세 사람은 얼떨결에 편지를 열어본다. 처음에는 장난이라고 생각하던 세 사람은 어느새 편지 내용에 이끌려 답장을 해주기 시작하는데…."
+            gc.price = 19240
+            gc.index = "제1장 답장은 우유 상자에\n제2장 한밤중에 하모니카를\n제3장 시빅 자동차에서 아침까지\n제4장 묵도는 비틀스로\n제5장 하늘 위에서 기도를\n옮긴이의 말"
+            gc.author = "히가시노 게이고"
+            gc.grade = 5.5
+            gc.publisher = "현대문학"
+            return gc
+        }()
+
         cs.append(c)
         cs.append(d)
+        cs.append(e)
+        cs.append(f)
+        cs.append(g)
         return cs
     }()
 

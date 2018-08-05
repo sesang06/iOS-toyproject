@@ -18,7 +18,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     var horizontalBarLeftAnchorConstraint : Constraint? = nil
     
     
-    let imageNames = ["game", "home", "home", "book"]
+    let imageNames = ["game", "wallpaper", "movie", "book"]
     override init(frame: CGRect) {
         super.init(frame: frame)
         

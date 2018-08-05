@@ -12,8 +12,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame : UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        let layout = UICollectionViewFlowLayout()
-        window?.rootViewController = UINavigationController(rootViewController: HomeController())
+        let nav = UINavigationController(rootViewController: HomeController())
+        nav.navigationBar.isTranslucent = true
+        
+        nav.navigationBar.tintColor = Constants.primaryColor
+        nav.navigationBar.barTintColor = Constants.primaryColor
+        //
+        
+        window?.rootViewController = nav
 //        UINavigationBar.appearance().backgroundColor = Constants.primaryDarkColor
        // UINavigationBar.appearance().titleTextAttributes = [ NSAttributedStringKey.foregroundColor : Constants.primaryTextColor]
         
@@ -40,8 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 //        window?.addConstraintsWithFormat("V:|[v0(20)]|", views: statusBarBackgroundView)
 // */
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
         
         // Override point for customization after application launch.
         return true

@@ -373,46 +373,6 @@ class ThreeImageTrendingCell : MovieCell {
         middleThumbnailImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
         leftThumbnailImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
         rightThumbnailImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
-//        addSubview(titleTextView)
-//        addSubview(contentTextView)
-//        addSubview(leftThumbnailImageView)
-//        addSubview(middleThumbnailImageView)
-//        addSubview(rightThumbnailImageView)
-//        leftThumbnailImageView.snp.makeConstraints { (make) in
-//            make.height.equalTo(leftThumbnailImageView.snp.width).multipliedBy(3.0 / 2.0)
-//            make.top.equalTo(self).offset(10)
-//            make.leading.equalTo(self).offset(10)
-//            make.width.equalTo(self).offset(-15).multipliedBy(1.0 / 3.0)
-//        }
-//        middleThumbnailImageView.snp.makeConstraints { (make) in
-//            make.height.equalTo(middleThumbnailImageView.snp.width).multipliedBy(3.0 / 2.0)
-//            make.top.equalTo(self).offset(10)
-//            make.leading.equalTo(leftThumbnailImageView.snp.trailing).offset(10)
-//            make.width.equalTo(self).offset(-15).multipliedBy(1.0 / 3.0)
-//
-//        }
-//
-//        rightThumbnailImageView.snp.makeConstraints { (make) in
-//            make.height.equalTo(rightThumbnailImageView.snp.width).multipliedBy(3.0 / 2.0)
-//            make.top.equalTo(self).offset(10)
-//            make.trailing.equalTo(self).offset(-10)
-//            make.width.equalTo(self).offset(-15).multipliedBy(1.0 / 3.0)
-//
-//        }
-//
-//        titleTextView.snp.makeConstraints { (make) in
-//            make.top.equalTo(middleThumbnailImageView.snp.bottom).offset(10)
-//            make.leading.equalTo(self).offset(10)
-//            make.trailing.equalTo(self).offset(-10)
-//            titleTextHeightConstraint =  make.height.equalTo(20).constraint
-//        }
-//
-//        contentTextView.snp.makeConstraints { (make) in
-//            make.top.equalTo(titleTextView.snp.bottom).offset(10)
-//            make.leading.equalTo(self).offset(10)
-//            make.trailing.equalTo(self).offset(-10)
-//            detailTextHeightConstraint = make.height.equalTo(20).constraint
-//        }
     }
 }
 class FourImageTrendingCell : MovieCell {
@@ -550,6 +510,7 @@ class FourImageTrendingCell : MovieCell {
 }
 protocol MovieCellDelegate : class {
     func thumbnailImageViewDidTapped(_ imageView : UIImageView, _ movieContent: MovieContent?)
+    func movieContentDidClicked(_ movieContent: MovieContent?)
 }
 
 class MovieCell : UICollectionViewCell {

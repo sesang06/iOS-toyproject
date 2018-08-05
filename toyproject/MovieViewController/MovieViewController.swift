@@ -15,7 +15,7 @@ class MovieViewController : UICollectionViewCell, UICollectionViewDataSource, UI
         
         return cv
     }()
-    var trendings : [MovieContent]?
+    var contents : [MovieContent]?
     let cellid = "cellid"
     let noImageCellId = "noImageCellId"
     let oneImageCellId = "oneImageCellId"
@@ -26,7 +26,7 @@ class MovieViewController : UICollectionViewCell, UICollectionViewDataSource, UI
     let headerId = "headerId"
     
     func setupContents(){
-         trendings = [MovieContent]()
+         contents = [MovieContent]()
         
         for i in 0..<5 {
             let trending = MovieContent()
@@ -45,7 +45,7 @@ class MovieViewController : UICollectionViewCell, UICollectionViewDataSource, UI
                 trending.titleText = "빨간맛"
                 trending.detailText = "\(i)번째 빨간 맛 궁금해 허니 깨물면 저점 녹아든 스트로베리 그 맛 코너 캔디 찾아봐 베이비 내가 제일좋아하는 여름그맛"
             }
-            trendings?.append(trending)
+            contents?.append(trending)
         }
         
         let trending = MovieContent()
@@ -57,7 +57,7 @@ class MovieViewController : UICollectionViewCell, UICollectionViewDataSource, UI
         trending.thumbnailImageNames?.append("land")
         trending.titleText = "마지막 처럼"
         trending.detailText = "번째 baby 날 터질 것처럼 안아줘 그만 생각해 뭐가 그리 어려워 거짓말 처럼 키스해줘 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼"
-        trendings?.append(trending)
+        contents?.append(trending)
         
         
     }
@@ -96,16 +96,16 @@ class MovieViewController : UICollectionViewCell, UICollectionViewDataSource, UI
         return CGSize(width: frame.width, height: 200)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return trendings?.count ?? 0
+        return contents?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.movieContentDidClicked(contents?[indexPath.item])
         
-        print("selected")
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let count = trendings?[indexPath.item].thumbnailImageNames?.count {
+        if let count = contents?[indexPath.item].thumbnailImageNames?.count {
             let identifier : String
             if (count == 0){
                 identifier = noImageCellId
@@ -120,13 +120,13 @@ class MovieViewController : UICollectionViewCell, UICollectionViewDataSource, UI
             }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! MovieCell
             cell.delegate = self.delegate
-            cell.content = trendings?[indexPath.item]
+            cell.content = contents?[indexPath.item]
             return cell
             
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellid, for: indexPath) as! MovieCell
-        cell.content = trendings?[indexPath.item]
+        cell.content = contents?[indexPath.item]
         return cell
     }
     
@@ -135,9 +135,9 @@ class MovieViewController : UICollectionViewCell, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let count = trendings?[indexPath.item].thumbnailImageNames?.count ?? 0
+        let count = contents?[indexPath.item].thumbnailImageNames?.count ?? 0
         let estimatedTextHeight : CGFloat
-        if let detailText = trendings?[indexPath.item].detailText {
+        if let detailText = contents?[indexPath.item].detailText {
             
             let style = NSMutableParagraphStyle()
             style.lineSpacing = 3

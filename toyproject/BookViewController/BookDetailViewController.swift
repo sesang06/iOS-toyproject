@@ -127,20 +127,37 @@ class BookDetailViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print(self.navigationController?.navigationBar.layer.zPosition)
+        self.navigationController?.navigationBar.layer.zPosition = -1
+//        navigationBar = self.navigationController?.navigationBar
         // Hide the navigation bar for current view controller
 //        self.navigationController?.navigationBar.barTintColor = UIColor.red;
 //        self.navigationController?.navigationBar.barTintColor = .clear
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.view.backgroundColor = .clear
-//        self.scrollViewDidScroll(scrollView)
-//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+//        self.navigationController?.navigationBar.isTranslucent = true
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//            self.navigationController?.extendedLayoutIncludesOpaqueBars = true
+        
     }
-    
+//    weak var navigationBar : UINavigationBar?
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewDidDisappear")
+//        print(navigationBar?.layer.zPosition)
+//        navigationBar?.layer.zPosition = -1
+//        print(self.navigationController?.navigationBar.layer.zPosition)
+////        self.navigationController?.isToolbarHidden = true
+//        self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+//        self.navigationController?.navigationBar.shadowImage = nil
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    
         // Show the navigation bar on other view controllers
+        
+//        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+//        self.navigationController?.navigationBar.shadowImage = nil
+        
 //        self.navigationController?.navigationBar.isTranslucent = false
 //        self.navigationController?.isNavigationBarHidden = false;
     }
@@ -168,7 +185,8 @@ class BookDetailViewController : UIViewController {
     }()
     
     @objc func actionDismiss(_ sender : Any){
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     static let offset_HeaderHeight : CGFloat = 300
     let offset_HeaderStop : CGFloat = offset_HeaderHeight - 64 - 3
@@ -179,7 +197,16 @@ class BookDetailViewController : UIViewController {
     func setUpViews(){
         view.backgroundColor = UIColor.white
         view.addSubview(scrollView)
+            
         view.addSubview(header)
+        view.addSubview(dissmissButon)
+        dissmissButon.snp.makeConstraints { (make) in
+            make.top.equalTo(view).offset(20 + 10)
+            make.leading.equalTo(view).offset(10)
+            make.width.height.equalTo(24 )
+        
+        }
+        
         let navigationBarHeight: CGFloat = self.topLayoutGuide.length
         header.clipsToBounds = true
         header.layer.masksToBounds = true
@@ -228,7 +255,7 @@ class BookDetailViewController : UIViewController {
         scrollView.addSubview(indexTextView)
         scrollView.alwaysBounceVertical = true
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(scrollView).offset(BookDetailViewController.offset_HeaderHeight+30)
+            make.top.equalTo(scrollView).offset(BookDetailViewController.offset_HeaderHeight - 30)
             make.leading.equalTo(scrollView).offset(15)
             make.trailing.equalTo(scrollView).offset(-15)
             make.width.equalTo(scrollView).offset(-30)
