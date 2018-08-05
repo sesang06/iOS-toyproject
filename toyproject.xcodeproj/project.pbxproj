@@ -20,8 +20,8 @@
 		8641A3F720F1E75B00BBC5A4 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3F620F1E75B00BBC5A4 /* FeedCell.swift */; };
 		8641A3F920F1F83900BBC5A4 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3F820F1F83900BBC5A4 /* ContentCell.swift */; };
 		8641A3FB20F1F9AB00BBC5A4 /* PinterrestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FA20F1F9AB00BBC5A4 /* PinterrestLayout.swift */; };
-		8641A3FD20F210EC00BBC5A4 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FC20F210EC00BBC5A4 /* TrendingCell.swift */; };
-		8641A3FF20F21CA500BBC5A4 /* FacebookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FE20F21CA500BBC5A4 /* FacebookCell.swift */; };
+		8641A3FD20F210EC00BBC5A4 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FC20F210EC00BBC5A4 /* MovieCell.swift */; };
+		8641A3FF20F21CA500BBC5A4 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FE20F21CA500BBC5A4 /* MovieViewController.swift */; };
 		86B5675E20F38DD600D2723A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5675D20F38DD600D2723A /* Extensions.swift */; };
 		86B5676020F4F3D800D2723A /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5675F20F4F3D800D2723A /* PostCell.swift */; };
 		86BB34612104B95F002351F8 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB34602104B95F002351F8 /* PostTableViewController.swift */; };
@@ -58,8 +58,8 @@
 		8641A3F620F1E75B00BBC5A4 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		8641A3F820F1F83900BBC5A4 /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		8641A3FA20F1F9AB00BBC5A4 /* PinterrestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterrestLayout.swift; sourceTree = "<group>"; };
-		8641A3FC20F210EC00BBC5A4 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
-		8641A3FE20F21CA500BBC5A4 /* FacebookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookCell.swift; sourceTree = "<group>"; };
+		8641A3FC20F210EC00BBC5A4 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		8641A3FE20F21CA500BBC5A4 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		86B5675D20F38DD600D2723A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		86B5675F20F4F3D800D2723A /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		86BB34602104B95F002351F8 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +112,15 @@
 			path = BookViewController;
 			sourceTree = "<group>";
 		};
+		862C07932115BB2D001713FB /* MovieViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8641A3FC20F210EC00BBC5A4 /* MovieCell.swift */,
+				8641A3FE20F21CA500BBC5A4 /* MovieViewController.swift */,
+			);
+			path = MovieViewController;
+			sourceTree = "<group>";
+		};
 		8641A3B220EFB54A00BBC5A4 = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +142,7 @@
 		8641A3BD20EFB54A00BBC5A4 /* toyproject */ = {
 			isa = PBXGroup;
 			children = (
+				862C07932115BB2D001713FB /* MovieViewController */,
 				862C0785210DFC54001713FB /* BookViewController */,
 				86D1BE04210C64760020F244 /* NanumBrush.ttf */,
 				86D1BE05210C64770020F244 /* NanumGothic.ttf */,
@@ -156,8 +166,6 @@
 				8641A3F620F1E75B00BBC5A4 /* FeedCell.swift */,
 				8641A3F820F1F83900BBC5A4 /* ContentCell.swift */,
 				8641A3FA20F1F9AB00BBC5A4 /* PinterrestLayout.swift */,
-				8641A3FC20F210EC00BBC5A4 /* TrendingCell.swift */,
-				8641A3FE20F21CA500BBC5A4 /* FacebookCell.swift */,
 				86B5675D20F38DD600D2723A /* Extensions.swift */,
 				863B1FF2210432D900BDAA0A /* View.xib */,
 			);
@@ -324,7 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86BB346321058EAF002351F8 /* PostEditorPhotoCollectionView.swift in Sources */,
-				8641A3FD20F210EC00BBC5A4 /* TrendingCell.swift in Sources */,
+				8641A3FD20F210EC00BBC5A4 /* MovieCell.swift in Sources */,
 				86EC7DD5210470AF005802FB /* PostEditorViewController.swift in Sources */,
 				8641A3C120EFB54A00BBC5A4 /* HomeController.swift in Sources */,
 				86019BF520FB76100018A6CA /* PhotoEditorViewController.swift in Sources */,
@@ -332,7 +340,7 @@
 				8641A3F720F1E75B00BBC5A4 /* FeedCell.swift in Sources */,
 				86BB34612104B95F002351F8 /* PostTableViewController.swift in Sources */,
 				8641A3FB20F1F9AB00BBC5A4 /* PinterrestLayout.swift in Sources */,
-				8641A3FF20F21CA500BBC5A4 /* FacebookCell.swift in Sources */,
+				8641A3FF20F21CA500BBC5A4 /* MovieViewController.swift in Sources */,
 				86B5675E20F38DD600D2723A /* Extensions.swift in Sources */,
 				862C078921109230001713FB /* BookDetailViewController.swift in Sources */,
 				86D1BE01210C62820020F244 /* GameViewController.swift in Sources */,

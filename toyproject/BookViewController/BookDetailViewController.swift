@@ -2,6 +2,14 @@ import UIKit
 import SnapKit
 
 class BookDetailViewController : UIViewController {
+    var statusBarHeight : CGFloat? {
+        didSet {
+//            scrollViewTopConstraint?.update(offset: -statusBarHeight!)
+            headerTopConstraint?.update(offset: -statusBarHeight!)
+//            scrollView.contentInset = UIEdgeInsetsMake(statusBarHeight!, 0, 0, 0)
+        }
+    }
+   
     var content : BookContent? {
         didSet {
             if let title = content?.title {
@@ -19,13 +27,15 @@ class BookDetailViewController : UIViewController {
                 let font : UIFont = UIFont(name: "NanumGothic", size : 16)!
                 let estimatedRect = NSString(string: content).boundingRect(with: size, options: options, attributes: [.font: font], context: nil)
                 contentTextViewHeightConstraint?.update(offset: estimatedRect.height)
-                
+                contentTextView.text = content
             }
-            if let index = content?.content {
+            if let index = content?.index {
                 let size = CGSize(width : view.frame.width - 15 - 15,  height : CGFloat.infinity)
                 let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
                 let font : UIFont = UIFont(name: "NanumGothic", size : 16)!
                 let estimatedRect = NSString(string: index).boundingRect(with: size, options: options, attributes: [.font: font], context: nil)
+                print(estimatedRect)
+                indexTextView.text = index
                 indexTextViewHeightConstraint?.update(offset: estimatedRect.height)
             }
         }
@@ -124,6 +134,7 @@ class BookDetailViewController : UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.view.backgroundColor = .clear
+//        self.scrollViewDidScroll(scrollView)
 //        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
@@ -160,27 +171,30 @@ class BookDetailViewController : UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     static let offset_HeaderHeight : CGFloat = 300
-    let offset_HeaderStop : CGFloat = offset_HeaderHeight - 77
+    let offset_HeaderStop : CGFloat = offset_HeaderHeight - 64 - 3
     let offset_B_LabelHeader:CGFloat = offset_HeaderHeight - 40 // At this offset the Black label reaches the Header
     let distance_W_LabelHeader:CGFloat = 35.0 // The distance between the bottom of the Header and the top
-    
+    var headerTopConstraint: Constraint?
+    var scrollViewTopConstraint : Constraint?
     func setUpViews(){
         view.backgroundColor = UIColor.white
         view.addSubview(scrollView)
         view.addSubview(header)
-        view.addSubview(dissmissButon)
-        dissmissButon.snp.makeConstraints { (make) in
-            make.top.equalTo(view).offset(30)
-            make.leading.equalTo(view).offset(10)
-            make.width.height.equalTo(30)
-        }
+        let navigationBarHeight: CGFloat = self.topLayoutGuide.length
         header.clipsToBounds = true
-        
+        header.layer.masksToBounds = true
         header.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view)
+           headerTopConstraint = make.top.equalTo(self.topLayoutGuide.snp.bottom).constraint
             make.trailing.equalTo(self.view)
             make.leading.equalTo(self.view)
             make.height.equalTo(BookDetailViewController.offset_HeaderHeight - 3)
+        }
+        scrollView.snp.makeConstraints { (make) in
+           scrollViewTopConstraint = make.top.equalTo(self.topLayoutGuide.snp.bottom).constraint
+            make.trailing.equalTo(self.view)
+            make.leading.equalTo(self.view)
+            make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
+            
         }
         header.backgroundColor = UIColor.red
         header.addSubview(headerImageView)
@@ -198,14 +212,8 @@ class BookDetailViewController : UIViewController {
             make.centerX.equalTo(header)
             make.top.equalTo(header.snp.top).offset(BookDetailViewController.offset_HeaderHeight)
         }
-        scrollView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view)
-            make.trailing.equalTo(self.view)
-            make.leading.equalTo(self.view)
-            make.bottom.equalTo(self.view)
-            
-        }
         
+        scrollView.delegate = self
         scrollView.isScrollEnabled = true
         scrollView.bounces = true
         
@@ -326,8 +334,9 @@ extension BookDetailViewController : UIScrollViewDelegate{
         // Apply Transformations
         
         header.layer.transform = headerTransform
-        scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(header.frame.height, 0, 0, 0)
+        scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(header.frame.height - 64, 0, 0, 0)
         print(header.frame.height)
+        print(header.frame)
         //   avatarImage.layer.transform = avatarTransform
         
     }

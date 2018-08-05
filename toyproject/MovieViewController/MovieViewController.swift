@@ -4,8 +4,8 @@ import Foundation
 import UIKit
 
 
-class FacebookCell : UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
+class MovieViewController : UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    weak var delegate : MovieCellDelegate?
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -15,7 +15,7 @@ class FacebookCell : UICollectionViewCell, UICollectionViewDataSource, UICollect
         
         return cv
     }()
-    var trendings : [Trending]?
+    var trendings : [MovieContent]?
     let cellid = "cellid"
     let noImageCellId = "noImageCellId"
     let oneImageCellId = "oneImageCellId"
@@ -26,10 +26,10 @@ class FacebookCell : UICollectionViewCell, UICollectionViewDataSource, UICollect
     let headerId = "headerId"
     
     func setupContents(){
-         trendings = [Trending]()
+         trendings = [MovieContent]()
         
         for i in 0..<5 {
-            let trending = Trending()
+            let trending = MovieContent()
 
             
             if (i % 2 == 0){
@@ -48,9 +48,11 @@ class FacebookCell : UICollectionViewCell, UICollectionViewDataSource, UICollect
             trendings?.append(trending)
         }
         
-        let trending = Trending()
+        let trending = MovieContent()
         trending.thumbnailImageNames = [String]()
         trending.thumbnailImageNames?.append("tear")
+        trending.thumbnailImageNames?.append("land")
+        
         trending.thumbnailImageNames?.append("dora")
         trending.thumbnailImageNames?.append("land")
         trending.titleText = "마지막 처럼"
@@ -79,7 +81,7 @@ class FacebookCell : UICollectionViewCell, UICollectionViewDataSource, UICollect
             make.bottom.equalTo(self)
         }
         collectionView.register(HotTrendingCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
-        collectionView.register(TrendingCell.self, forCellWithReuseIdentifier: cellid)
+        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: cellid)
         collectionView.register(NoImageTrendingCell.self, forCellWithReuseIdentifier : noImageCellId)
         collectionView.register(OneImageTrendingCell.self, forCellWithReuseIdentifier : oneImageCellId)
         collectionView.register(TwoImageTrendingCell.self, forCellWithReuseIdentifier : twoImageCellId)
@@ -97,6 +99,11 @@ class FacebookCell : UICollectionViewCell, UICollectionViewDataSource, UICollect
         return trendings?.count ?? 0
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        print("selected")
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let count = trendings?[indexPath.item].thumbnailImageNames?.count {
             let identifier : String
@@ -111,48 +118,46 @@ class FacebookCell : UICollectionViewCell, UICollectionViewDataSource, UICollect
             }else {
                 identifier = fourImageCellId
             }
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! TrendingCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! MovieCell
+            cell.delegate = self.delegate
             cell.content = trendings?[indexPath.item]
             return cell
             
         }
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellid, for: indexPath) as! TrendingCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellid, for: indexPath) as! MovieCell
         cell.content = trendings?[indexPath.item]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let count = trendings?[indexPath.item].thumbnailImageNames?.count ?? 0
         let estimatedTextHeight : CGFloat
-        if let titleText = trendings?[indexPath.item].titleText, let detailText = trendings?[indexPath.item].detailText {
+        if let detailText = trendings?[indexPath.item].detailText {
             
-            let size = CGSize(width : frame.width - 20,  height : 1000)
+            let style = NSMutableParagraphStyle()
+            style.lineSpacing = 3
+            let attributes : [NSAttributedStringKey : Any] = [NSAttributedStringKey.paragraphStyle : style, NSAttributedStringKey.font : UIFont(name: "NanumGothic", size: 14)!]
+        
+            let size = CGSize(width : frame.width - (15 + 50 + 10),  height : CGFloat.infinity)
             let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
             
-            let titleEstimatedRect = NSString(string: titleText).boundingRect(with: size, options: options, attributes: [.font: UIFont.systemFont(ofSize: 14)], context: nil)
-           
-            
-            let detailEstimatedRect = NSString(string: detailText).boundingRect(with: size, options: options, attributes: [.font: UIFont.systemFont(ofSize: 14)], context: nil)
-           
-            
-            estimatedTextHeight = max(40, titleEstimatedRect.size.height + 40) + max(40, detailEstimatedRect.size.height + 40)
-            
+            let estimatedRect = NSString(string: detailText).boundingRect(with: size, options: options, attributes: attributes, context: nil)
+        
+            estimatedTextHeight = estimatedRect.size.height
         }else {
             estimatedTextHeight = 0
         }
         let estimatedPhotoHeight : CGFloat
         if count == 0 {
-            estimatedPhotoHeight = 100
-        }else if count == 1 {
-            estimatedPhotoHeight = 200
-        }else if count == 2 {
-            estimatedPhotoHeight = ((frame.width - 30) / 2)
+            estimatedPhotoHeight = 15 + 20 + 3 + 20 //여백
         }else {
-            estimatedPhotoHeight = ((frame.width - 30) )
-            
+            estimatedPhotoHeight = 15 + 20 + 3 + 10 + 3 + 200 + 20
         }
         return CGSize(width: frame.width, height: estimatedTextHeight + estimatedPhotoHeight)
     }
-    
-}
+ }
