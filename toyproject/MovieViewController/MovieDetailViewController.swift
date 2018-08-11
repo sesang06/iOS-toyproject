@@ -3,7 +3,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class MovieDetailViewController : UIViewController {
+class MovieDetailViewController : UIViewController, UIScrollViewDelegate {
     var content : MovieContent? {
         didSet {
             let style = NSMutableParagraphStyle()
@@ -79,9 +79,12 @@ class MovieDetailViewController : UIViewController {
         scrollView.snp.makeConstraints { (make) in
             make.top.equalTo(topLayoutGuide.snp.bottom)
             make.leading.trailing.equalTo(self.view)
-            make.bottom.equalTo(bottomLayoutGuide.snp.bottom)
+            make.bottom.equalTo(bottomLayoutGuide.snp.top)
             
         }
+        scrollView.delegate = self
+        scrollView.isScrollEnabled = true
+        scrollView.bounces = true
         
         scrollView.addSubview(profileImageView)
         scrollView.addSubview(profileNameLabel)

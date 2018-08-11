@@ -4,9 +4,12 @@ import Foundation
 import UIKit
 
 
+protocol PhotoViewControllerDelegate : class {
+    func photoContentDidClicked(_ photoContent : PhotoContent?)
+}
 class PhotoViewController : UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, PinterestLayoutDelegate  {
     var homeController : HomeController?
-    
+    weak var delegate : PhotoViewControllerDelegate?
     lazy var collectionView : UICollectionView = {
         let layout = PinterrestLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -107,11 +110,16 @@ class PhotoViewController : UICollectionViewCell, UICollectionViewDataSource, UI
         return contents?.count ?? 0
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.delegate?.photoContentDidClicked(contents?[indexPath.item])
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellid, for: indexPath) as! PhotoCell
         cell.content = contents?[indexPath.item]
         return cell
     }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

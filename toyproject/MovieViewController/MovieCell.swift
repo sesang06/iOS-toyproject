@@ -1,6 +1,3 @@
-
-import Foundation
-
 import UIKit
 import SnapKit
 class MovieContent : NSObject {
@@ -14,157 +11,6 @@ enum TrendingType {
     case noImage, oneImage, twoImage, threeImage, moreImage
 }
 
-/*
- 비디오
- */
-class VideoCell : BaseCell {
-    let thumbnailImageView : UIImageView = {
-       let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-      //  iv.layer.cornerRadius =
-        iv.layer.masksToBounds = true
-        iv.image = UIImage(named: "land")
-        return iv
-    }()
-    
-    let titleLabel : UILabel = {
-        let label = UILabel()
-        label.text = "하루에 네번 사랑을 말하고 여덟번 웃고 여섯번의 키스를 해줘 날 열어주는 단 하나뿐인 비밀번호야 누구도 알수없게 너만이 나를 가질 수 있도록"
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.numberOfLines = 2
-        return label
-    }()
-    
-    let ownerLabel : UILabel = {
-        let label = UILabel()
-        label.text = "윤하"
-        label.font = UIFont.systemFont(ofSize: 13)
-        label.numberOfLines = 1
-        label.textColor = UIColor.darkGray
-        return label
-    }()
-    
-    override func setupViews() {
-       addSubview(thumbnailImageView)
-        addSubview(titleLabel)
-        addSubview(ownerLabel)
-        thumbnailImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(self).offset(0)
-            make.leading.equalTo(self).offset(10)
-            make.trailing.equalTo(self).offset(-10)
-        }
-        titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(thumbnailImageView.snp.bottom).offset(5)
-            make.leading.equalTo(self).offset(10)
-            make.height.equalTo(40)
-            make.trailing.equalTo(self).offset(-10)
-            
-            
-        }
-        ownerLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(3)
-            make.leading.equalTo(self).offset(10)
-            make.height.equalTo(15)
-            make.trailing.equalTo(self).offset(-10)
-            make.bottom.equalTo(self).offset(-5)
-        }
-    }
-}
-
-class HotTrendingCell : BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    let todaysTrendLabel : UILabel = {
-        let label = UILabel()
-        label.text = "인기 동영상"
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.numberOfLines = 1
-        
-        return label
-    }()
-    lazy var collectionView : UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.white
-        cv.dataSource = self
-        cv.delegate = self
-        return cv
-    }()
-    let cellId = "cellid"
-   /* func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        print(targetContentOffset.pointee.x )
-        if (targetContentOffset.pointee.x == 0 && velocity.x < 0){
-            print("hey")
-            scrollView.isScrollEnabled = false
-        }else {
-            scrollView.isScrollEnabled = true
-        }
-        
-    }*/
-    /*
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        if scrollView == self.collectionView.scrollView || scrollView == offersCollectionView {
-            let offersCollectionViewPosition: CGFloat = offersCollectionView.contentOffset.y
-            let scrollViewBottomEdge: CGFloat = scrollView.contentOffset.y + scrollView.frame.height
-            if scrollViewBottomEdge >= self.scrollView.contentSize.height {
-                self.scrollView.isScrollEnabled = false
-                offersCollectionView.isScrollEnabled = true
-            } else if offersCollectionViewPosition <= 0.0 && offersCollectionView.isScrollEnabled() {
-                self.scrollView.scrollRectToVisible(self.scrollView.frame(), animated: true)
-                self.scrollView.isScrollEnabled = true
-                offersCollectionView.isScrollEnabled = false
-            }
-        }
-    }*/
-    override func setupViews() {
-        
-        collectionView.register(VideoCell.self, forCellWithReuseIdentifier: cellId)
-        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.scrollDirection = .horizontal
-            flowLayout.minimumLineSpacing = 0
-        }
-        collectionView.bounces = false
-        collectionView.showsHorizontalScrollIndicator = false
-        addSubview(todaysTrendLabel)
-        addSubview(collectionView)
-        todaysTrendLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self).offset(10)
-            make.leading.equalTo(self).offset(10)
-            make.height.equalTo(20)
-        }
-        
-        collectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(todaysTrendLabel.snp.bottom).offset(10)
-            make.left.equalTo(self)
-            make.right.equalTo(self)
-            make.bottom.equalTo(self)
-        }
-       
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150 , height: frame.height - 40)
-    }
-    
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-
-
-}
 
 class NoImageTrendingCell : MovieCell {
     
@@ -511,6 +357,8 @@ class FourImageTrendingCell : MovieCell {
 protocol MovieCellDelegate : class {
     func thumbnailImageViewDidTapped(_ imageView : UIImageView, _ movieContent: MovieContent?)
     func movieContentDidClicked(_ movieContent: MovieContent?)
+    
+    func videoContentDidClicked(_ videoContent: VideoContent?)
 }
 
 class MovieCell : UICollectionViewCell {

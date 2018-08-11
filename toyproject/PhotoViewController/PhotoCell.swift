@@ -10,6 +10,20 @@ class PhotoContent : NSObject {
 }
 
 class PhotoCell : UICollectionViewCell {
+    override var isHighlighted: Bool {
+        didSet {
+            if (isHighlighted){
+                UIView.animate(withDuration: 0.75) {
+                    self.backgroundColor = UIColor.rgb(226, green: 228, blue: 232)
+                   }
+            }else {
+                UIView.animate(withDuration: 0.75) {
+                    self.backgroundColor = UIColor.white
+                  }
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -26,33 +40,51 @@ class PhotoCell : UICollectionViewCell {
             titleLabel.text = self.content?.titleText!
         }
     }
+    
+    let cardView : UIView = {
+       let v = UIView()
+        v.layer.cornerRadius = 10
+        v.layer.shadowOffset = .zero
+        v.layer.shadowOpacity = 0.7
+        v.layer.shadowRadius = 5
+        return v
+    }()
     let thumbnailImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.black
-        imageView.image = UIImage(named: "tear")
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
+//        imageView.layer.addShadow()
+
+        imageView.clipsToBounds = true
+//        imageView.layer.roundCorners(radius: 10)
+//        imageView.layer.masksToBounds = false
         imageView.layer.cornerRadius = 10
+//        imageView.layer.shadowRadius = 14
+//        imageView.layer.shadowOffset = CGSize(width: 0, height: 10)
+//        imageView.layer.shadowOpacity = 0.7
         return imageView
     }()
     
     let titleLabel : UILabel = {
         let label = UILabel()
-        label.text = "친구를 만나느라 shy shy shy"
         label.font = UIFont(name: "NanumGothicBold", size: 12)
         label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
     func setupViews(){
-        addSubview(thumbnailImageView)
+        addSubview(cardView)
+        cardView.addSubview(thumbnailImageView)
         addSubview(titleLabel)
         
-        thumbnailImageView.snp.makeConstraints { (make) in
+        cardView.snp.makeConstraints { (make) in
             thumbnailImageHeightConstraint =  make.height.equalTo(300).constraint
             make.top.equalTo(self).offset(10)
             make.leading.equalTo(self).offset(10)
             make.trailing.equalTo(self).offset(-10)
+            
+        }
+        thumbnailImageView.snp.makeConstraints { (make) in
+            make.top.leading.trailing.bottom.equalTo(cardView)
         }
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(thumbnailImageView.snp.bottom).offset(5)
@@ -70,3 +102,41 @@ class PhotoCell : UICollectionViewCell {
     }
 }
 
+extension CALayer {
+    private func addShadowWithRoundedCorners(){
+        if let contents = self.contents {
+            masksToBounds = false
+            sublayers?.filter{ $0.frame.equalTo(self.bounds)}
+                .forEach{$0.roundCorners(radius: self.cornerRadius)}
+            self.contents = nil
+            if let sublayer = sublayers?.first,
+            sublayer.name == "contentLayerName" {
+                sublayer.removeFromSuperlayer()
+            }
+            let contentLayer = CALayer()
+            contentLayer.name = "contentLayerName"
+            contentLayer.contents = contents
+            contentLayer.frame = bounds
+            contentLayer.cornerRadius = cornerRadius
+            contentLayer.masksToBounds = true
+            insertSublayer(contentLayer, at: 0)
+            
+        }
+    }
+    func addShadow(){
+        self.shadowOffset = .zero
+        self.shadowOpacity = 1
+        self.shadowRadius = 10
+        self.shadowColor = UIColor.black.cgColor
+        self.masksToBounds = false
+        if cornerRadius != 0 {
+            addShadowWithRoundedCorners()
+        }
+    }
+    func roundCorners(radius : CGFloat){
+        self.cornerRadius = radius
+        if shadowOpacity != 0 {
+            addShadowWithRoundedCorners()
+        }
+    }
+}

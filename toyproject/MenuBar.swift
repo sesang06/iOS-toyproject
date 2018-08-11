@@ -13,7 +13,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         cv.delegate = self
         return cv
     }()
-    let cellId = "cellIdj"
+    let cellId = "menuCellId"
     var homeController : HomeController?
     var horizontalBarLeftAnchorConstraint : Constraint? = nil
     
@@ -22,14 +22,18 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellId)
         addSubview(collectionView)
+        collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellId)
         
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(self)
             make.left.equalTo(self)
             make.right.equalTo(self)
             make.bottom.equalTo(self)
+        }
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 0
         }
         //addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         //addConstraintsWithFormat("V:|[v0]|", views: collectionView)
@@ -66,11 +70,11 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
-    
+  
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("hello")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
         cell.imageView.image = UIImage(named: imageNames[indexPath.item])?.withRenderingMode(.alwaysTemplate)
-        cell.tintColor = UIColor.blue
         return cell
     }
     
@@ -110,7 +114,6 @@ extension UIView {
 class MenuCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(imageView)
         
         setupViews()
     }
@@ -134,7 +137,7 @@ class MenuCell: UICollectionViewCell {
         }
     }
     func setupViews(){
-        
+        addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
             make.height.equalTo(28)
             make.width.equalTo(28)

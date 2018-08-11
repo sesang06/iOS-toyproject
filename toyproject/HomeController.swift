@@ -134,6 +134,10 @@ class HomeController: UIViewController, UICollectionViewDelegateFlowLayout , UIC
             return cell
         }else if (indexPath.item == 1){
             identifier = feedCellId
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PhotoViewController
+            cell.delegate = self
+            return cell
+            
         }else if (indexPath.item == 2){
             identifier = facebookCellId
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! MovieViewController
@@ -194,13 +198,27 @@ extension HomeController : BookViewControllerDelegate {
     
     
 }
-
+extension HomeController : PhotoViewControllerDelegate {
+    func photoContentDidClicked(_ photoContent: PhotoContent?) {
+        let vc = PhotoDetailViewController()
+        vc.content = photoContent
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+}
 extension HomeController : MovieCellDelegate {
     func movieContentDidClicked(_ movieContent: MovieContent?) {
         let vc = MovieDetailViewController()
         vc.content = movieContent
-//        self.navigationController?.navigationBar.layer.zPosition = 0
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    func videoContentDidClicked(_ videoContent: VideoContent?) {
+        let vc = VideoDetailViewController()
+        vc.content = videoContent
+        vc.modalPresentationStyle = .overFullScreen
+//        self.navigationController?.pushViewController(vc, animated: true)
+        self.present(vc, animated: true, completion: nil)
     }
     func thumbnailImageViewDidTapped(_ imageView: UIImageView, _ movieContent: MovieContent?) {
         self.touchedImageView = imageView

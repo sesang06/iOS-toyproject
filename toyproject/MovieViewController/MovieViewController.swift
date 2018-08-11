@@ -80,7 +80,7 @@ class MovieViewController : UICollectionViewCell, UICollectionViewDataSource, UI
             make.trailing.equalTo(self)
             make.bottom.equalTo(self)
         }
-        collectionView.register(HotTrendingCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
+        collectionView.register(VideoCollectionViewCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
         collectionView.register(MovieCell.self, forCellWithReuseIdentifier: cellid)
         collectionView.register(NoImageTrendingCell.self, forCellWithReuseIdentifier : noImageCellId)
         collectionView.register(OneImageTrendingCell.self, forCellWithReuseIdentifier : oneImageCellId)
@@ -89,7 +89,8 @@ class MovieViewController : UICollectionViewCell, UICollectionViewDataSource, UI
         collectionView.register(FourImageTrendingCell.self, forCellWithReuseIdentifier: fourImageCellId)
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! HotTrendingCell
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! VideoCollectionViewCell
+        header.delegate = self.delegate
         return header
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
