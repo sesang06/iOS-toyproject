@@ -66,6 +66,7 @@ class PostEditorViewController  : UIViewController{
             make.bottom.equalTo(self.toolBar.snp.top)
             
         }
+        photoSelectedPostContents = [PostContent]()
         scrollView.isScrollEnabled = true
         scrollView.addSubview(textView)
         textView.delegate = self
@@ -120,7 +121,7 @@ UIBarButtonItem(image: UIImage(named: "camera")?.withRenderingMode(.alwaysTempla
     override func viewDidLoad() {
         setUpView()
         setUpNavigationBar()
-        grabPhotos()
+      //  grabPhotos()
     }
     override func viewDidAppear(_ animated: Bool) {
         registerForKeyboardNotifications()
@@ -382,7 +383,9 @@ extension PostEditorViewController : PostEditorPhotoPickerControllerDelegate {
     func postEditorPhotoPickerController(_ picker: PostEditorPhotoPickerController, didFinishPickingContents contents: [PostContent]?) {
         if let contents = contents {
             photoSelectedPostContents?.append(contentsOf: contents)
-            self.postEditorPhotoCollectionView.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.postEditorPhotoCollectionView.collectionView.reloadData()
+            }
         }
         self.dismiss(animated: true, completion: nil)
     }

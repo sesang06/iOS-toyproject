@@ -1,6 +1,6 @@
 import UIKit
 import SnapKit
-
+import SDWebImage
 class BookDetailViewController : UIViewController {
     var statusBarHeight : CGFloat? {
         didSet {
@@ -12,8 +12,12 @@ class BookDetailViewController : UIViewController {
    
     var content : BookContent? {
         didSet {
+            if let url = URL(string : (content?.thumbnailImageUrl)!) {
+                headerImageView.sd_setImage(with: url, completed: nil)
+            }
             if let title = content?.title {
                 titleLabel.text = title
+                headerLabel.text = title
             }
             if let author = content?.author, let publisher = content?.publisher, let createdDate = content?.createdTime {
                 let dateFormatter = DateFormatter()
@@ -116,13 +120,8 @@ class BookDetailViewController : UIViewController {
     
     var indexTextViewHeightConstraint : Constraint?
     var contentTextViewHeightConstraint : Constraint?
-    override func loadView() {
-        super.loadView()
-       }
     override func viewDidLoad() {
         setUpViews()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,28 +137,6 @@ class BookDetailViewController : UIViewController {
 //        self.navigationController?.navigationBar.shadowImage = UIImage()
 //            self.navigationController?.extendedLayoutIncludesOpaqueBars = true
         
-    }
-//    weak var navigationBar : UINavigationBar?
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print("viewDidDisappear")
-//        print(navigationBar?.layer.zPosition)
-//        navigationBar?.layer.zPosition = -1
-//        print(self.navigationController?.navigationBar.layer.zPosition)
-////        self.navigationController?.isToolbarHidden = true
-//        self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
-//        self.navigationController?.navigationBar.shadowImage = nil
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    
-        // Show the navigation bar on other view controllers
-        
-//        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-//        self.navigationController?.navigationBar.shadowImage = nil
-        
-//        self.navigationController?.navigationBar.isTranslucent = false
-//        self.navigationController?.isNavigationBarHidden = false;
     }
     let header = UIView()
     let blurredEffectView : UIVisualEffectView = {

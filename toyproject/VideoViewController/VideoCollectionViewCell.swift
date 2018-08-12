@@ -51,7 +51,7 @@ class VideoCollectionViewCell : BaseCell, UICollectionViewDataSource, UICollecti
      }
      }*/
     override func setupViews() {
-        
+        fetchVideo()
         collectionView.register(VideoCell.self, forCellWithReuseIdentifier: cellId)
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.scrollDirection = .horizontal
@@ -76,16 +76,31 @@ class VideoCollectionViewCell : BaseCell, UICollectionViewDataSource, UICollecti
         }
         
     }
+    func fetchVideo(){
+        ApiService.shared.fetchVideoContents { (result) in
+            switch(result){
+            case let .failure(error):
+                break
+            case let .success(videoContents):
+                self.contents = videoContents
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+                break
+            }
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return contents?.count ?? 0
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.videoContentDidClicked(nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! VideoCell
+        cell.content = contents?[indexPath.item]
         return cell
     }
     

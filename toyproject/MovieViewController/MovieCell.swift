@@ -1,10 +1,5 @@
 import UIKit
 import SnapKit
-class MovieContent : NSObject {
-    var thumbnailImageNames : [String]? //섬네일을 가져가기 위한 이미지뷰 (멀티)
-    var titleText : String? //타이틀을 가져온다
-    var detailText : String? //디테일을 가져온다
-}
 
 
 enum TrendingType {
@@ -357,7 +352,7 @@ class FourImageTrendingCell : MovieCell {
 protocol MovieCellDelegate : class {
     func thumbnailImageViewDidTapped(_ imageView : UIImageView, _ movieContent: MovieContent?)
     func movieContentDidClicked(_ movieContent: MovieContent?)
-    
+    func profileContentDidClicked(_ profileContent: ProfileContent?)
     func videoContentDidClicked(_ videoContent: VideoContent?)
 }
 
@@ -372,6 +367,10 @@ class MovieCell : UICollectionViewCell {
         delegate?.thumbnailImageViewDidTapped(imageView, self.content)
         
     }
+    @objc func profileDidTapped(recognizer : UITapGestureRecognizer){
+        delegate?.profileContentDidClicked(nil)
+    }
+    
     weak var delegate : MovieCellDelegate?
     var titleTextHeightConstraint : Constraint? = nil
     var detailTextHeightConstraint : Constraint? = nil
@@ -398,6 +397,8 @@ class MovieCell : UICollectionViewCell {
         iv.contentMode = .scaleAspectFill
         iv.image = UIImage(named: "dora")
         iv.clipsToBounds = true
+        iv.isUserInteractionEnabled = true
+        
         iv.layer.cornerRadius = 25
         return iv
     }()
@@ -468,6 +469,7 @@ class MovieCell : UICollectionViewCell {
             make.leading.equalTo(self).offset(15)
             make.height.width.equalTo(50)
         }
+        profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileDidTapped)))
         
         profileNameLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(15)

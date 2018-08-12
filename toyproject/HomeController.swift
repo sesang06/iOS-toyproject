@@ -208,6 +208,13 @@ extension HomeController : PhotoViewControllerDelegate {
     
 }
 extension HomeController : MovieCellDelegate {
+    func profileContentDidClicked(_ profileContent: ProfileContent?) {
+        let vc = ProfileViewController()
+        vc.content = profileContent
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     func movieContentDidClicked(_ movieContent: MovieContent?) {
         let vc = MovieDetailViewController()
         vc.content = movieContent

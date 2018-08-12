@@ -25,12 +25,14 @@
 		8641A3FB20F1F9AB00BBC5A4 /* PinterrestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FA20F1F9AB00BBC5A4 /* PinterrestLayout.swift */; };
 		8641A3FD20F210EC00BBC5A4 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FC20F210EC00BBC5A4 /* MovieCell.swift */; };
 		8641A3FF20F21CA500BBC5A4 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3FE20F21CA500BBC5A4 /* MovieViewController.swift */; };
+		8642A262211FC485004509CC /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8642A261211FC485004509CC /* Content.swift */; };
+		8642A26521204763004509CC /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8642A26421204763004509CC /* ApiService.swift */; };
+		8642A26721208610004509CC /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8642A26621208610004509CC /* BookCell.swift */; };
 		865D615B211D86EA003F033D /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865D615A211D86EA003F033D /* VideoDetailViewController.swift */; };
 		865D615D211EF8A9003F033D /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865D615C211EF8A9003F033D /* VideoCollectionViewCell.swift */; };
 		865D615F211EF997003F033D /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865D615E211EF997003F033D /* VideoCell.swift */; };
 		86B5675E20F38DD600D2723A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5675D20F38DD600D2723A /* Extensions.swift */; };
 		86B5676020F4F3D800D2723A /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B5675F20F4F3D800D2723A /* PostCell.swift */; };
-		86BB34612104B95F002351F8 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB34602104B95F002351F8 /* PostTableViewController.swift */; };
 		86BB346321058EAF002351F8 /* PostEditorPhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB346221058EAF002351F8 /* PostEditorPhotoCollectionView.swift */; };
 		86BB34672105CD9E002351F8 /* PostEditorPhotoPreviewCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB34662105CD9E002351F8 /* PostEditorPhotoPreviewCollectionView.swift */; };
 		86BB3479210869E1002351F8 /* PostEditorPhotoPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BB3478210869E1002351F8 /* PostEditorPhotoPickerController.swift */; };
@@ -69,12 +71,14 @@
 		8641A3FA20F1F9AB00BBC5A4 /* PinterrestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterrestLayout.swift; sourceTree = "<group>"; };
 		8641A3FC20F210EC00BBC5A4 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		8641A3FE20F21CA500BBC5A4 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
+		8642A261211FC485004509CC /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
+		8642A26421204763004509CC /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		8642A26621208610004509CC /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		865D615A211D86EA003F033D /* VideoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
 		865D615C211EF8A9003F033D /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		865D615E211EF997003F033D /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		86B5675D20F38DD600D2723A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		86B5675F20F4F3D800D2723A /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
-		86BB34602104B95F002351F8 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
 		86BB346221058EAF002351F8 /* PostEditorPhotoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorPhotoCollectionView.swift; sourceTree = "<group>"; };
 		86BB34662105CD9E002351F8 /* PostEditorPhotoPreviewCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorPhotoPreviewCollectionView.swift; sourceTree = "<group>"; };
 		86BB3478210869E1002351F8 /* PostEditorPhotoPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditorPhotoPickerController.swift; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			children = (
 				862C0786210DFD32001713FB /* BookViewController.swift */,
 				862C078821109230001713FB /* BookDetailViewController.swift */,
+				8642A26621208610004509CC /* BookCell.swift */,
 			);
 			path = BookViewController;
 			sourceTree = "<group>";
@@ -189,6 +194,7 @@
 		8641A3BD20EFB54A00BBC5A4 /* toyproject */ = {
 			isa = PBXGroup;
 			children = (
+				8642A26321204707004509CC /* ApiService */,
 				865D6159211D84E1003F033D /* VideoViewController */,
 				862C079A21188D62001713FB /* ProfileViewController */,
 				862C079721174A65001713FB /* Fonts */,
@@ -211,6 +217,15 @@
 			path = toyproject;
 			sourceTree = "<group>";
 		};
+		8642A26321204707004509CC /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				8642A26421204763004509CC /* ApiService.swift */,
+				8642A261211FC485004509CC /* Content.swift */,
+			);
+			path = ApiService;
+			sourceTree = "<group>";
+		};
 		865D6159211D84E1003F033D /* VideoViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,10 +241,8 @@
 			children = (
 				86B5675F20F4F3D800D2723A /* PostCell.swift */,
 				86EC7DD4210470AF005802FB /* PostEditorViewController.swift */,
-				86BB34602104B95F002351F8 /* PostTableViewController.swift */,
 				86BB346221058EAF002351F8 /* PostEditorPhotoCollectionView.swift */,
 				86BB34662105CD9E002351F8 /* PostEditorPhotoPreviewCollectionView.swift */,
-				86019BF420FB76100018A6CA /* PhotoEditorViewController.swift */,
 			);
 			path = PostEditerViewController;
 			sourceTree = "<group>";
@@ -237,6 +250,7 @@
 		86BB34752107278A002351F8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				86019BF420FB76100018A6CA /* PhotoEditorViewController.swift */,
 				86BB3478210869E1002351F8 /* PostEditorPhotoPickerController.swift */,
 			);
 			path = View;
@@ -362,12 +376,16 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-toyproject/Pods-toyproject-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -389,10 +407,10 @@
 				865D615B211D86EA003F033D /* VideoDetailViewController.swift in Sources */,
 				8641A3C120EFB54A00BBC5A4 /* HomeController.swift in Sources */,
 				86019BF520FB76100018A6CA /* PhotoEditorViewController.swift in Sources */,
+				8642A26721208610004509CC /* BookCell.swift in Sources */,
 				86BB34672105CD9E002351F8 /* PostEditorPhotoPreviewCollectionView.swift in Sources */,
 				862C079C21188DAB001713FB /* ProfileViewController.swift in Sources */,
 				8641A3F720F1E75B00BBC5A4 /* PhotoViewController.swift in Sources */,
-				86BB34612104B95F002351F8 /* PostTableViewController.swift in Sources */,
 				8641A3FB20F1F9AB00BBC5A4 /* PinterrestLayout.swift in Sources */,
 				8641A3FF20F21CA500BBC5A4 /* MovieViewController.swift in Sources */,
 				86B5675E20F38DD600D2723A /* Extensions.swift in Sources */,
@@ -404,9 +422,11 @@
 				86B5676020F4F3D800D2723A /* PostCell.swift in Sources */,
 				86D1BE13210D5C5E0020F244 /* GameDetailViewController.swift in Sources */,
 				862C0799211881CF001713FB /* PhotoDetailViewController.swift in Sources */,
+				8642A262211FC485004509CC /* Content.swift in Sources */,
 				862C0787210DFD32001713FB /* BookViewController.swift in Sources */,
 				8641A3C720EFB54A00BBC5A4 /* toyproject.xcdatamodeld in Sources */,
 				862C07952116F90A001713FB /* MovieDetailViewController.swift in Sources */,
+				8642A26521204763004509CC /* ApiService.swift in Sources */,
 				8641A3F920F1F83900BBC5A4 /* PhotoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

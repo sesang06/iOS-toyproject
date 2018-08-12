@@ -93,7 +93,7 @@ class PostEditorPhotoCollectionView : BaseCell, UICollectionViewDelegateFlowLayo
        // cv.dataSource = self
         cv.delegate = self
         cv.showsHorizontalScrollIndicator = false
-        cv.isPagingEnabled = true
+//        cv.isPagingEnabled = true
         return cv
     }()
     override func setupViews() {
@@ -108,55 +108,6 @@ class PostEditorPhotoCollectionView : BaseCell, UICollectionViewDelegateFlowLayo
     }
 }
 
-//extension PostEditorPhotoCollectionView : UICollectionViewDelegate {
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return contents?.count ?? 0
-//    }
-//
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellid, for: indexPath) as! PostEditorPhotoCell
-//        cell.delegate = self
-//
-//        if let content = contents?[indexPath.item], let asset = content.asset {
-//            cell.content = content
-//            cell.representedAssetIdentifier = asset.localIdentifier
-//            let pixcelWidth = asset.pixelWidth
-//            let pixcelHeight = asset.pixelHeight
-//            let height : CGFloat = 200 - 20
-//            let width = height * ( CGFloat(pixcelWidth) / CGFloat(pixcelHeight) )
-//            let targetSize = CGSize(width: width , height : height )
-//            imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: nil) { (image, _) in
-//                if (cell.representedAssetIdentifier == asset.localIdentifier){
-//                    cell.thumbnailImageView.image = image
-//                }
-//            }
-//        }
-//
-//        return cell
-//
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        if let content = contents?[indexPath.item], let asset = content.asset{
-//            let pixcelWidth = asset.pixelWidth
-//            let pixcelHeight = asset.pixelHeight
-//            let height : CGFloat = 200 - 20
-//            let width = height * ( CGFloat(pixcelWidth) / CGFloat(pixcelHeight) )
-//            return CGSize(width: width, height: height)
-//        }
-//        return CGSize(width: 200, height: 200-20)
-//    }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsetsMake(10, 10, 10, 10)
-//    }
-//
-//}
-//
-//extension PostEditorPhotoCollectionView : UICollectionViewDataSource {
-//
-//}
 extension PostEditorPhotoCollectionView {
     func grabPhotos(){
         DispatchQueue.global(qos: .background).async {

@@ -1,13 +1,6 @@
 import Foundation
 import UIKit
 import SnapKit
-class PhotoContent : NSObject {
-    var thumbnailImageName : String? //섬네일을 가져가기 위한 이미지뷰
-    var titleText : String? //타이틀을 가져온다
-    var detailText : String? //디테일을 가져온다
-    var imageHeight : CGFloat? //이미지 하이트
-    var imageWidth : CGFloat?
-}
 
 class PhotoCell : UICollectionViewCell {
     override var isHighlighted: Bool {
@@ -40,13 +33,24 @@ class PhotoCell : UICollectionViewCell {
             titleLabel.text = self.content?.titleText!
         }
     }
-    
-    let cardView : UIView = {
-       let v = UIView()
+    let cardShadowView : UIView = {
+        let v = UIView()
         v.layer.cornerRadius = 10
         v.layer.shadowOffset = .zero
         v.layer.shadowOpacity = 0.7
         v.layer.shadowRadius = 5
+        return v
+        
+    }()
+    
+    let cardView : UIView = {
+       let v = UIView()
+        v.layer.cornerRadius = 10
+        v.clipsToBounds = true
+//        v.layer.cornerRadius = 10
+//        v.layer.shadowOffset = .zero
+//        v.layer.shadowOpacity = 0.7
+//        v.layer.shadowRadius = 5
         return v
     }()
     let thumbnailImageView : UIImageView = {
@@ -57,7 +61,7 @@ class PhotoCell : UICollectionViewCell {
         imageView.clipsToBounds = true
 //        imageView.layer.roundCorners(radius: 10)
 //        imageView.layer.masksToBounds = false
-        imageView.layer.cornerRadius = 10
+//        imageView.layer.cornerRadius = 10
 //        imageView.layer.shadowRadius = 14
 //        imageView.layer.shadowOffset = CGSize(width: 0, height: 10)
 //        imageView.layer.shadowOpacity = 0.7
@@ -72,28 +76,58 @@ class PhotoCell : UICollectionViewCell {
         return label
     }()
     func setupViews(){
-        addSubview(cardView)
-        cardView.addSubview(thumbnailImageView)
-        addSubview(titleLabel)
+        addSubview(cardShadowView)
         
-        cardView.snp.makeConstraints { (make) in
-            thumbnailImageHeightConstraint =  make.height.equalTo(300).constraint
+        cardShadowView.addSubview(cardView)
+        cardView.addSubview(thumbnailImageView)
+        cardView.addSubview(titleLabel)
+        
+        cardView.backgroundColor = UIColor.white
+        
+        cardShadowView.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(10)
             make.leading.equalTo(self).offset(10)
             make.trailing.equalTo(self).offset(-10)
-            
+            make.bottom.equalTo(self).offset(-10)
+        }
+        cardView.snp.makeConstraints { (make) in
+            make.top.trailing.leading.bottom.equalTo(cardShadowView)
         }
         thumbnailImageView.snp.makeConstraints { (make) in
-            make.top.leading.trailing.bottom.equalTo(cardView)
+            make.top.leading.trailing.equalTo(cardView)
+            thumbnailImageHeightConstraint =  make.height.equalTo(300).constraint
+            
         }
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(thumbnailImageView.snp.bottom).offset(5)
-            make.leading.equalTo(self).offset(15)
-            make.trailing.equalTo(self).offset(-15)
+            make.leading.equalTo(cardView).offset(5)
+            make.trailing.equalTo(cardView).offset(-5)
             make.height.equalTo(20)
-            make.bottom.equalTo(self).offset(-10)
-            
+            make.bottom.equalTo(cardView).offset(-5)
+
         }
+
+//        addSubview(titleLabel)
+//
+//        cardView.snp.makeConstraints { (make) in
+//            thumbnailImageHeightConstraint =  make.height.equalTo(300).constraint
+//            make.top.equalTo(self).offset(10)
+//            make.leading.equalTo(self).offset(10)
+//            make.trailing.equalTo(self).offset(-10)
+//
+//        }
+//        thumbnailImageView.snp.makeConstraints { (make) in
+//            make.top.leading.trailing.bottom.equalTo(cardView)
+//
+//        }
+//        titleLabel.snp.makeConstraints { (make) in
+//            make.top.equalTo(thumbnailImageView.snp.bottom).offset(5)
+//            make.leading.equalTo(self).offset(15)
+//            make.trailing.equalTo(self).offset(-15)
+//            make.height.equalTo(20)
+//            make.bottom.equalTo(self).offset(-10)
+//
+//        }
         
         
     }

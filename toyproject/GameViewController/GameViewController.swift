@@ -1,12 +1,6 @@
 import Foundation
 import SnapKit
 import UIKit
-class GameContent : NSObject {
-    var createdTime : Date?
-    var title : String?
-    var thumbnailImageName : String?
-    var content : String?
-}
 
 class GameCell : BaseCell {
     override var isHighlighted: Bool {

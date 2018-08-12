@@ -104,20 +104,6 @@ class PostEditPhotoCell : BaseCell {
  //       photoImageView.isUserInteractionEnabled = true
     }
 }
-enum PostContentType {
-    case asset
-    case image
-}
-class PostContent : NSObject {
-    var asset : PHAsset?
-    var selectedNumber : Int?
-    var image : UIImage?
-    let type : PostContentType
-    init(type : PostContentType) {
-        self.type = type
-    }
-}
-
 class PostCell : BaseCell, UICollectionViewDataSource, UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout {
     lazy var collectionView : UICollectionView = {
