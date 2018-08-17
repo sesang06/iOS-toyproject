@@ -2,6 +2,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 ## 소개
+![개발 중인 글쓰기 UI](https://t1.daumcdn.net/cfile/tistory/9969BB3A5B5811E820)
 
 - 개발 중 (2018.6.6 ~ ) 프로젝트
 - Snapkit으로 스토리보드 없이 ui 디자인하기
