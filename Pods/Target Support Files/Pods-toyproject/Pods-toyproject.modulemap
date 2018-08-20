@@ -1,0 +1,6 @@
+framework module Pods_toyproject {
+  umbrella header "Pods-toyproject-umbrella.h"
+
+  export *
+  module * { export * }
+}

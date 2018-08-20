@@ -64,5 +64,8 @@ class ApiService : NSObject {
         bookContent.append(v)
         completion(ContentResult<[BookContent]>.success(bookContent))
     }
+    func fetchGameContents(completion : @escaping (ContentResult<GameContent>)-> ()){
+        
+    }
     
 }

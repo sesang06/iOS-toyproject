@@ -126,7 +126,6 @@ class BookDetailViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(self.navigationController?.navigationBar.layer.zPosition)
         self.navigationController?.navigationBar.layer.zPosition = -1
 //        navigationBar = self.navigationController?.navigationBar
         // Hide the navigation bar for current view controller
