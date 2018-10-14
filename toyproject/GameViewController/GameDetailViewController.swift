@@ -27,6 +27,9 @@ class GameDetailViewController : UIViewController, UIScrollViewDelegate {
                 contentTextViewHeightConstraint?.update(offset: estimatedRect.height)
                 
             }
+            if let thumbnailImageName = content?.thumbnailImageName {
+                thunbnailImageView.image = UIImage(named: thumbnailImageName)
+            }
             
         }
     }

@@ -9,7 +9,6 @@ class VideoCell : BaseCell {
         didSet {
             let url = URL(string: (content?.thumbnailImageUrl!)!)
             thumbnailImageView.sd_setImage(with: url, completed: nil)
-            //thumbnailImageView.image = UIImage(named: (content?.thumbnailImageName!)!)
             titleLabel.text = content?.titleText
             ownerLabel.text = content?.username
         }

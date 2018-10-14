@@ -41,18 +41,24 @@ class ApiService : NSObject {
     func fetchVideoContents(completion : @escaping (ContentResult<[VideoContent]>)-> ()) {
         var videoContent = [VideoContent]()
         let v = VideoContent()
-        v.titleText = "젤다의 전설 브레스 오브 더 와일드 [1화] 한글로 즐기는 젤다의 첫 발걸음!"
+        v.titleText = "Apple - WWDC 2017 Keynote"
         v.thumbnailImageName = "dora"
-        v.username = "도라"
+        v.username = "Apple"
         
-        v.thumbnailImageUrl = "https://i.ytimg.com/vi/wopX0OE6esM/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLA2Oj9p4dLqvmHB9ZfOdmQUfarndA"
+        v.thumbnailImageUrl = "https://i.ytimg.com/vi/oaqHdULqet0/hqdefault.jpg"
         videoContent.append(v)
         let vd = VideoContent()
-        vd.titleText = "젤다의 전설 브레스 오브 더 와일드 [1화] 한글로 즐기는 젤다의 첫 발걸음!"
+        vd.titleText = "Apple - WWDC 2018 Keynote"
         vd.thumbnailImageName = "dora"
-        vd.username = "도라"
-        vd.thumbnailImageUrl = "https://i.ytimg.com/vi/wopX0OE6esM/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLA2Oj9p4dLqvmHB9ZfOdmQUfarndA"
+        vd.username = "Apple"
+        vd.thumbnailImageUrl = "https://i.ytimg.com/vi/UThGcWBIMpU/hqdefault.jpg"
         videoContent.append(vd)
+        let va = VideoContent()
+        va.titleText = "A few new thing made by google"
+        va.thumbnailImageName = "dora"
+        va.username = "Google"
+        va.thumbnailImageUrl = "https://i.ytimg.com/vi/bkRhoGPo2is/hqdefault.jpg"
+        videoContent.append(va)
         completion(ContentResult<[VideoContent]>.success(videoContent))
     }
     func fetchBookContents(completion : @escaping (ContentResult<[BookContent]>)-> ()) {
