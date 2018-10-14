@@ -2,7 +2,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 ## 소개
-<img src="https://github.com/sesang06/iOS-toyproject/blob/master/ReadMeImages/image0.png?raw=true" width="187" height="333"/>
+<img src="https://github.com/sesang06/iOS-toyproject/blob/master/ReadMeImages/video0.gif?raw=true" width="187" height="333"/>
 
 - 개발 중 (2018.6.6 ~ ) 프로젝트
 - Snapkit으로 스토리보드 없이 ui 디자인하기
