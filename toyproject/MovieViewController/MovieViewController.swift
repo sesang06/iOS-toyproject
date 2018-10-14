@@ -28,37 +28,55 @@ class MovieViewController : UICollectionViewCell, UICollectionViewDataSource, UI
     func setupContents(){
          contents = [MovieContent]()
         
-        for i in 0..<5 {
+        contents?.append({
             let trending = MovieContent()
-
-            
-            if (i % 2 == 0){
-                trending.thumbnailImageNames = [String]()
-                trending.thumbnailImageNames?.append("tear")
-                trending.thumbnailImageNames?.append("dora")
-                trending.titleText = "마지막 처럼"
-                trending.detailText = "\(i)번째 baby 날 터질 것처럼 안아줘 그만 생각해 뭐가 그리 어려워 거짓말 처럼 키스해줘 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼"
-            }else {
-              
-                trending.thumbnailImageNames = [String]()
-                trending.thumbnailImageNames?.append("tear")
-                trending.titleText = "빨간맛"
-                trending.detailText = "\(i)번째 빨간 맛 궁금해 허니 깨물면 저점 녹아든 스트로베리 그 맛 코너 캔디 찾아봐 베이비 내가 제일좋아하는 여름그맛"
-            }
-            contents?.append(trending)
-        }
-        
-        let trending = MovieContent()
-        trending.thumbnailImageNames = [String]()
-        trending.thumbnailImageNames?.append("tear")
-        trending.thumbnailImageNames?.append("land")
-        
-        trending.thumbnailImageNames?.append("dora")
-        trending.thumbnailImageNames?.append("land")
-        trending.titleText = "마지막 처럼"
-        trending.detailText = "번째 baby 날 터질 것처럼 안아줘 그만 생각해 뭐가 그리 어려워 거짓말 처럼 키스해줘 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼"
-        contents?.append(trending)
-        
+            trending.thumbnailImageNames = [String]()
+            trending.thumbnailImageNames?.append("pop")
+            trending.titleText = "Itunes"
+            trending.profileImageName = "itunes"
+            trending.detailText = "\"I'm off the deep end, watch as I dive in.\"\nSee the spark between @LadyGaga and Bradley Cooper in #AStarIsBorn.\nIn theaters now and pre-order today!"
+            return trending
+            }())
+//        for i in 0..<5 {
+//            let trending = MovieContent()
+//
+//
+//            if (i % 2 == 0){
+//                trending.thumbnailImageNames = [String]()
+//                trending.thumbnailImageNames?.append("tear")
+//                trending.thumbnailImageNames?.append("dora")
+//                trending.titleText = "마지막 처럼"
+//                trending.detailText = "\(i)번째 baby 날 터질 것처럼 안아줘 그만 생각해 뭐가 그리 어려워 거짓말 처럼 키스해줘 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼"
+//            }else {
+//
+//                trending.thumbnailImageNames = [String]()
+//                trending.thumbnailImageNames?.append("tear")
+//                trending.titleText = "빨간맛"
+//                trending.detailText = "\(i)번째 빨간 맛 궁금해 허니 깨물면 저점 녹아든 스트로베리 그 맛 코너 캔디 찾아봐 베이비 내가 제일좋아하는 여름그맛"
+//            }
+//            contents?.append(trending)
+//        }
+//
+//        let trending = MovieContent()
+//        trending.thumbnailImageNames = [String]()
+//        trending.thumbnailImageNames?.append("tear")
+//        trending.thumbnailImageNames?.append("land")
+//
+//        trending.thumbnailImageNames?.append("dora")
+//        trending.thumbnailImageNames?.append("land")
+//        trending.titleText = "마지막 처럼"
+//        trending.detailText = "번째 baby 날 터질 것처럼 안아줘 그만 생각해 뭐가 그리 어려워 거짓말 처럼 키스해줘 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼"
+//        contents?.append(trending)
+        contents?.append({
+            let trending = MovieContent()
+            trending.thumbnailImageNames = [String]()
+            trending.thumbnailImageNames?.append("applemusic1")
+            trending.thumbnailImageNames?.append("applemusic2")
+            trending.titleText = "Genius"
+            trending.profileImageName = "genius"
+            trending.detailText = "🎧 GENIUS GETS SMART WITH APPLE MUSIC 🎧 \nwe’re proud to make @applemusic our first official music player, AND to add the world’s best lyrics to Apple Music’s growing database, providing lyrics to thousands of hit songs 🙌\nmore info 👉 http://so.genius.com/uDBqA8b\n\n"
+            return trending
+            }())
         
     }
     

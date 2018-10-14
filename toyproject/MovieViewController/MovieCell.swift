@@ -389,13 +389,18 @@ class MovieCell : UICollectionViewCell {
                 detailTextHeightConstraint?.update(offset: estimatedRect.size.height)
                 
             }
-
+            if let profileImageName = content?.profileImageName{
+                profileImageView.image = UIImage(named: profileImageName)
+            }
+            if let profileText = content?.titleText {
+                profileNameLabel.text = profileText
+            }
         }
     }
     let profileImageView : UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        iv.image = UIImage(named: "dora")
+//        iv.image = UIImage(named: "dora")
         iv.clipsToBounds = true
         iv.isUserInteractionEnabled = true
         

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06894B762172D91C00BB221A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06894B752172D91C00BB221A /* Assets.xcassets */; };
 		86019BF520FB76100018A6CA /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86019BF420FB76100018A6CA /* PhotoEditorViewController.swift */; };
 		862C0787210DFD32001713FB /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862C0786210DFD32001713FB /* BookViewController.swift */; };
 		862C078921109230001713FB /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862C078821109230001713FB /* BookDetailViewController.swift */; };
@@ -17,7 +18,6 @@
 		8641A3BF20EFB54A00BBC5A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3BE20EFB54A00BBC5A4 /* AppDelegate.swift */; };
 		8641A3C120EFB54A00BBC5A4 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3C020EFB54A00BBC5A4 /* HomeController.swift */; };
 		8641A3C720EFB54A00BBC5A4 /* toyproject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3C520EFB54A00BBC5A4 /* toyproject.xcdatamodeld */; };
-		8641A3C920EFB55000BBC5A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8641A3C820EFB55000BBC5A4 /* Assets.xcassets */; };
 		8641A3CC20EFB55000BBC5A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8641A3CA20EFB55000BBC5A4 /* LaunchScreen.storyboard */; };
 		8641A3F520F1059900BBC5A4 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3F420F1059900BBC5A4 /* MenuBar.swift */; };
 		8641A3F720F1E75B00BBC5A4 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8641A3F620F1E75B00BBC5A4 /* PhotoViewController.swift */; };
@@ -51,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06894B752172D91C00BB221A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86019BF420FB76100018A6CA /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
 		862C0786210DFD32001713FB /* BookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 		862C078821109230001713FB /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
@@ -62,7 +63,6 @@
 		8641A3BE20EFB54A00BBC5A4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8641A3C020EFB54A00BBC5A4 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		8641A3C620EFB54A00BBC5A4 /* toyproject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = toyproject.xcdatamodel; sourceTree = "<group>"; };
-		8641A3C820EFB55000BBC5A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8641A3CB20EFB55000BBC5A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8641A3CD20EFB55000BBC5A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8641A3F420F1059900BBC5A4 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
@@ -194,6 +194,7 @@
 		8641A3BD20EFB54A00BBC5A4 /* toyproject */ = {
 			isa = PBXGroup;
 			children = (
+				06894B752172D91C00BB221A /* Assets.xcassets */,
 				8642A26321204707004509CC /* ApiService */,
 				865D6159211D84E1003F033D /* VideoViewController */,
 				862C079A21188D62001713FB /* ProfileViewController */,
@@ -206,7 +207,6 @@
 				86BB34682105D126002351F8 /* PostEditerViewController */,
 				8641A3BE20EFB54A00BBC5A4 /* AppDelegate.swift */,
 				8641A3C020EFB54A00BBC5A4 /* HomeController.swift */,
-				8641A3C820EFB55000BBC5A4 /* Assets.xcassets */,
 				8641A3CA20EFB55000BBC5A4 /* LaunchScreen.storyboard */,
 				8641A3CD20EFB55000BBC5A4 /* Info.plist */,
 				8641A3C520EFB54A00BBC5A4 /* toyproject.xcdatamodeld */,
@@ -335,12 +335,12 @@
 			files = (
 				86D1BE11210C647A0020F244 /* NanumGothicExtraBold.ttf in Resources */,
 				8641A3CC20EFB55000BBC5A4 /* LaunchScreen.storyboard in Resources */,
+				06894B762172D91C00BB221A /* Assets.xcassets in Resources */,
 				86D1BE0C210C647A0020F244 /* NanumBrush.ttf in Resources */,
 				86D1BE0E210C647A0020F244 /* NanumMyeongjoExtraBold.ttf in Resources */,
 				863B1FF3210432D900BDAA0A /* View.xib in Resources */,
 				86D1BE0A210C647A0020F244 /* NanumPen.ttf in Resources */,
 				86D1BE0B210C647A0020F244 /* NanumGothicBold.ttf in Resources */,
-				8641A3C920EFB55000BBC5A4 /* Assets.xcassets in Resources */,
 				86D1BE0F210C647A0020F244 /* NanumMyeongjoBold.ttf in Resources */,
 				86D1BE10210C647A0020F244 /* NanumMyeongjo.ttf in Resources */,
 				86D1BE0D210C647A0020F244 /* NanumGothic.ttf in Resources */,

@@ -46,6 +46,7 @@ class MovieContent : NSObject {
     var thumbnailImageNames : [String]? //섬네일을 가져가기 위한 이미지뷰 (멀티)
     var titleText : String? //타이틀을 가져온다
     var detailText : String? //디테일을 가져온다
+    var profileImageName : String? //섬네일을 가져온다
 }
 class PhotoContent : NSObject {
     var thumbnailImageName : String? //섬네일을 가져가기 위한 이미지뷰

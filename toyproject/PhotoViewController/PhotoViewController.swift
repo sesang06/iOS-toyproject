@@ -28,16 +28,16 @@ class PhotoViewController : UICollectionViewCell, UICollectionViewDataSource, UI
     func setupContents(){
         contents = [PhotoContent]()
         
-        for i in 1...3 {
+        for i in 1...2 {
             var image = UIImage()
             let content = PhotoContent()
             if (i % 2 == 0){
                 content.thumbnailImageName = "dora"
-                content.titleText = "마지막 처럼"
+                content.titleText = "[피카소] 우는 여인"
                 content.detailText = "\(i)번째 baby 날 터질 것처럼 안아줘 그만 생각해 뭐가 그리 어려워 거짓말 처럼 키스해줘 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼 내가 너에게 마지막 사랑인 것처럼 마지막처럼 마마마지막처럼 마지막인 것 처럼"
             }else {
                 content.thumbnailImageName = "tear"
-                content.titleText = "빨간맛"
+                content.titleText = "[리히텐슈타인] 행복한 눈물"
                 content.detailText = "\(i)번째 빨간 맛 궁금해 허니 깨물면 저점 녹아든 스트로베리 그 맛 코너 캔디 찾아봐 베이비 내가 제일좋아하는 여름그맛"
             }
             
@@ -48,8 +48,8 @@ class PhotoViewController : UICollectionViewCell, UICollectionViewDataSource, UI
         }
         let d : PhotoContent = {
             let gc = PhotoContent()
-            gc.thumbnailImageName = "indi"
-            gc.titleText = "[인디 큐레이터] 무더위, 우리의 지갑을 지킬 '무료 인디 게임'"
+            gc.thumbnailImageName = "isak"
+            gc.titleText = "[밀레] 이삭 줍는 여인"
             let image = UIImage(named: gc.thumbnailImageName!)!
             gc.imageHeight = CGFloat((image.cgImage?.height)!)
             gc.imageWidth = CGFloat((image.cgImage?.width)!)
@@ -59,8 +59,8 @@ class PhotoViewController : UICollectionViewCell, UICollectionViewDataSource, UI
         }()
         let e : PhotoContent = {
             let gc = PhotoContent()
-            gc.thumbnailImageName = "labor"
-            gc.titleText = "노동부 \"게임 서버가 터져도 52시간 근무 지켜야 한다\""
+            gc.thumbnailImageName = "bada"
+            gc.titleText = "[고흐] 생 마리 드라메르의 바다 풍경"
             let image = UIImage(named: gc.thumbnailImageName!)!
             gc.imageHeight = CGFloat((image.cgImage?.height)!)
             gc.imageWidth = CGFloat((image.cgImage?.width)!)
@@ -71,7 +71,7 @@ class PhotoViewController : UICollectionViewCell, UICollectionViewDataSource, UI
         let f : PhotoContent = {
             let gc = PhotoContent()
             gc.thumbnailImageName = "land"
-            gc.titleText = "파랗게 blue blue 우리가 칠해지네 서로의 맘도 파랗게 멍들어갈 때"
+            gc.titleText = "[고흐] 별 헤는 밤"
             let image = UIImage(named: gc.thumbnailImageName!)!
             gc.imageHeight = CGFloat((image.cgImage?.height)!)
             gc.imageWidth = CGFloat((image.cgImage?.width)!)
@@ -82,7 +82,28 @@ class PhotoViewController : UICollectionViewCell, UICollectionViewDataSource, UI
         contents?.append(f)
         contents?.append(e)
         contents?.append(d)
-        
+        contents?.append( {
+            let gc = PhotoContent()
+            gc.thumbnailImageName = "girl"
+            gc.titleText = "[베르메르] 진주 목걸이를 한 소녀"
+            let image = UIImage(named: gc.thumbnailImageName!)!
+            gc.imageHeight = CGFloat((image.cgImage?.height)!)
+            gc.imageWidth = CGFloat((image.cgImage?.width)!)
+            
+            
+            return gc
+            }())
+        contents?.append( {
+            let gc = PhotoContent()
+            gc.thumbnailImageName = "pond"
+            gc.titleText = "[모네] 수련 연못"
+            let image = UIImage(named: gc.thumbnailImageName!)!
+            gc.imageHeight = CGFloat((image.cgImage?.height)!)
+            gc.imageWidth = CGFloat((image.cgImage?.width)!)
+            
+            
+            return gc
+            }())
     }
     
     override init(frame: CGRect) {
